@@ -9,4 +9,31 @@
     <router-outlet></router-outlet>
 </ng-template>
 -->
-asdasdasd
+<div class="flex gap-3 p-2">
+    <button hlmBtn>Button</button>
+    <button hlmBtn variant='secondary'>Secondary</button>
+    <button hlmBtn variant='destructive'>Destructive</button>
+    <button hlmBtn variant='outline'>Outline</button>
+    <button hlmBtn variant='ghost'>Ghost</button>
+    <button hlmBtn variant='link'>Link</button>
+    <button hlmBtn size="icon" variant="outline">
+        <hlm-icon size='sm' name="radixChevronRight" />
+    </button>
+
+    <button hlmBtn>
+        <hlm-icon size="sm" class="mr-2" name="radixEnvelopeClosed" />
+        Login with Email
+    </button>
+
+    <button disabled hlmBtn>
+        <hlm-icon name="radixSymbol" size="sm" class="mr-2 animate-spin" />
+        Please wait
+    </button>
+</div>
+
+<form class="flex gap-3 p-2">
+    <label class="flex items-center" hlmLabel [htmlFor]="airplaneMode">
+        <hlm-switch id="airplaneMode" class="mr-2"></hlm-switch>
+        Airplane mode
+    </label>
+</form>

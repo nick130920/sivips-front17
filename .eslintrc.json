@@ -1,9 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -41,53 +45,92 @@
           "error",
           {
             "selector": "variable",
-            "modifiers": ["const"],
-            "format": ["strictCamelCase", "UPPER_CASE"]
+            "modifiers": [
+              "const"
+            ],
+            "format": [
+              "strictCamelCase",
+              "UPPER_CASE"
+            ]
           },
           {
             "selector": "variable",
-            "types": ["boolean"],
-            "format": ["StrictPascalCase"],
-            "prefix": ["is", "should", "has", "can", "did", "will"]
+            "types": [
+              "boolean"
+            ],
+            "format": [
+              "StrictPascalCase"
+            ],
+            "prefix": [
+              "is",
+              "should",
+              "has",
+              "can",
+              "did",
+              "will"
+            ]
           },
           {
             "selector": "function",
-            "format": ["strictCamelCase"]
+            "format": [
+              "strictCamelCase"
+            ]
           },
           {
             "selector": "parameter",
-            "format": ["strictCamelCase"],
+            "format": [
+              "strictCamelCase"
+            ],
             "leadingUnderscore": "allow"
           },
           {
             "selector": "memberLike",
-            "format": ["strictCamelCase"]
+            "format": [
+              "strictCamelCase"
+            ]
           },
           {
             "selector": "memberLike",
-            "modifiers": ["private"],
-            "format": ["strictCamelCase"],
+            "modifiers": [
+              "private"
+            ],
+            "format": [
+              "strictCamelCase"
+            ],
             "leadingUnderscore": "require"
           },
           {
             "selector": "typeLike",
-            "format": ["StrictPascalCase"]
+            "format": [
+              "StrictPascalCase"
+            ]
           },
           {
             "selector": "enum",
-            "format": ["StrictPascalCase"]
+            "format": [
+              "StrictPascalCase"
+            ]
           },
           {
             "selector": "enumMember",
-            "format": ["StrictPascalCase"]
+            "format": [
+              "StrictPascalCase"
+            ]
           }
         ]
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"],
-      "rules": {}
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {
+        "@angular-eslint/template/accessibility/label-has-associated-control": "off"
+      }
     }
   ]
 }
