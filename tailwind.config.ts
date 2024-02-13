@@ -11,12 +11,13 @@ const CUSTOM_PLUGINS = [addDynamicIconSelectors()];
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
+    presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
+    content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}', './src/app/lib/components/**/*.{html,ts}'],
     darkMode: 'class',
     theme: {
         fontFamily: {
-            display: ['Oswald', 'sans-serif'],
-            body: ['Poppins', 'sans-serif'],
+            display: ['Open Sans', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
         },
         container: {
             center: true,

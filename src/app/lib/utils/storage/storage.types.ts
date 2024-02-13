@@ -1,16 +1,13 @@
-import { AppTheme } from '@lib/services/theme';
-
-type StorageObjectMap = {
+/*type StorageObjectMap = {
     appSession: {
         user: string;
         token: string;
     };
-    appTheme: AppTheme;
-};
+};*/
 
-export type StorageObjectType = 'appSession' | 'appTheme';
+export type StorageObjectType = 'appSession';
 
 export type StorageObjectData<T extends StorageObjectType> = {
     type: T;
-    data: StorageObjectMap[T];
+    data: T extends 'appSession' ? { user: string; token: string } : never;
 };
