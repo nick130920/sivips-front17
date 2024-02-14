@@ -64,6 +64,7 @@
     "ngx-scrollbar": "^13.0.1",
     "postcss": "^8.4.35",
     "rxjs": "~7.8.0",
+    "sweetalert2": "11.10.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

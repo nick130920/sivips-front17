@@ -113,6 +113,9 @@ dependencies:
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
+  sweetalert2:
+    specifier: 11.10.5
+    version: 11.10.5
   tslib:
     specifier: ^2.3.0
     version: 2.6.2
@@ -13213,6 +13216,10 @@ packages:
       csso: 5.0.5
       picocolors: 1.0.0
     dev: true
+
+  /sweetalert2@11.10.5:
+    resolution: {integrity: sha512-q9eE3EKhMcpIDU/Xcz7z5lk8axCGkgxwK47gXGrrfncnBJWxHPPHnBVAjfsVXcTt8Yi8U6HNEcBRSu+qGeyFdA==}
+    dev: false
 
   /symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
