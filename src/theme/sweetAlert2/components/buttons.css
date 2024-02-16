@@ -1,0 +1,53 @@
+.swal2-confirm.swal2-styled {
+    background-color: hsl(var(--primary));
+    border-radius: var(--radius);
+    color: hsl(var(--primary-foreground));
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &:hover {
+        background-color: hsl(var(--primary) / 0.9);
+    }
+}
+
+.swal2-deny.swal2-styled {
+    background-color: hsl(var(--accent));
+    border-radius: var(--radius);
+    color: hsl(var(--accent-foreground));
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.swal2-close {
+    &:hover {
+        color: hsl(var(--destructive));
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.swal2-cancel.swal2-styled {
+    background-color: hsl(var(--destructive)/40%);
+    border-radius: var(--radius);
+
+    color: hsl(var(--destructive-foreground));
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &:hover {
+        background-color: hsl(var(--destructive)/60%);
+        color: hsl(var(--destructive-foreground));
+    }
+}
+
+.swal2-icon.swal2-error.swal2-icon-show {
+    display: none !important;
+}

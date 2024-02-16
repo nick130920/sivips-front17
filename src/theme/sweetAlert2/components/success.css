@@ -1,0 +1,36 @@
+div:where(.swal2-icon).swal2-success {
+    display: none !important;
+}
+div:where(.swal2-container).swal2-center > .swal2-popup.swal2-icon-success:before,
+div:where(.swal2-container).swal2-center > .swal2-popup.swal2-icon-success:after {
+    content: '';
+    background-color: hsl(var(--primary));
+}
+
+div:where(.swal2-container).swal2-center > .swal2-popup.swal2-icon-success:before {
+    content: '';
+    position: relative;
+    width: 512px;
+    height: 10px;
+    background-color: hsl(var(--primary));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+div:where(.swal2-container).swal2-center > .swal2-popup.swal2-icon-success:after {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    left: 50%;
+    margin-left: -27.5px;
+    top: -27.5px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83z'/%3E%3C/svg%3E");
+}
+div:where(.swal2-icon).swal2-success.swal2-icon-show {
+    z-index: 999999;
+}

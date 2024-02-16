@@ -155,7 +155,7 @@ devDependencies:
     specifier: ^2.2.64
     version: 2.2.182
   '@iconify/tailwind':
-    specifier: ^0.1.2
+    specifier: ^0.1.4
     version: 0.1.4
   '@spartan-ng/cli':
     specifier: 0.0.1-alpha.336
