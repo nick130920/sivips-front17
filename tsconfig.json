@@ -24,6 +24,7 @@
     "paths": {
       "@lib/*": ["src/app/lib/*"],
       "@pages/*": ["src/app/pages/*"],
+      "@assets/*": ["src/assets/*"],
       "@env/*": ["src/environments/*"],
       "@spartan-ng/ui-accordion-helm": ["./src/app/lib/ui/ui-accordion-helm/src/index.ts"],
       "@spartan-ng/ui-alert-helm": ["./src/app/lib/ui/ui-alert-helm/src/index.ts"],

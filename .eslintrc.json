@@ -129,7 +129,7 @@
         "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {
-        "@angular-eslint/template/accessibility/label-has-associated-control": "off"
+
       }
     }
   ]

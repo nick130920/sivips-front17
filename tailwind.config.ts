@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { addDynamicIconSelectors } from '@iconify/tailwind';
-import { colors } from 'tailwindcss/defaultTheme';
 
 const TAILWIND_PLUGINS = [
     require('@tailwindcss/aspect-ratio'),
@@ -10,7 +9,6 @@ const TAILWIND_PLUGINS = [
 
 const CUSTOM_PLUGINS = [addDynamicIconSelectors()];
 const THEME = {
-    ...colors,
     ocre: {
         50: '#fff8e6',
         100: '#FDF9EC',
@@ -51,8 +49,9 @@ export default {
             center: true,
             padding: '1.5rem',
         },
-        colors: THEME,
-        extend: {},
+        extend: {
+            colors: THEME,
+        },
     },
     plugins: [...TAILWIND_PLUGINS, ...CUSTOM_PLUGINS],
 };
