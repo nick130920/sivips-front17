@@ -13,7 +13,7 @@ export class LoginComponent {
 
     private readonly _router = inject(Router);
     private readonly _authService = inject(AuthService);
-
+    isSmall = false;
     login(): void {
         this._authService.login();
 
