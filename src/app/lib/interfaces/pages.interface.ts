@@ -1,5 +1,11 @@
 export interface Pages {
     title: string;
-    link: string;
+    subPages?: SubPages[];
+    link?: string;
     icon: string;
+}
+
+export interface SubPages {
+    title: string;
+    link: string;
 }

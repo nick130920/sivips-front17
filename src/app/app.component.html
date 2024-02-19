@@ -1,12 +1,2 @@
-<!--
-<app-layout-horizontal *ngIf="isAuthenticated$ | async; else notAuthorized">
-
-</app-layout-horizontal>
--->
-<app-navbar></app-navbar>
+<app-sidebar *ngIf="isAuthenticated"></app-sidebar>
 <router-outlet></router-outlet>
-<!--
-<ng-template #notAuthorized>
-    <router-outlet></router-outlet>
-</ng-template>
--->

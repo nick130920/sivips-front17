@@ -1,0 +1,67 @@
+<div class="sm:hidden w-full bg-gris-700 align-middle flex justify-between">
+    <button hlmBtn variant='outline' class="font-bold text-white" (click)="toggleSidebar()">
+        <span class="icon-[solar--hamburger-menu-linear] h-6 w-6"></span>
+    </button>
+    <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
+         class="mr-1 h-10 w-10 rounded-full object-cover p-1"
+         alt="foto usuario" />
+</div>
+<aside #sidebarBig (mouseleave)="toggleSideBarMouseOver()"
+       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gris-700">
+    <button (click)="onBigSidebar()"
+            class="absolute right-[-12px] top-[25px] border-gris-700 border-2 bg-white rounded-full w-7 h-7 justify-center items-center sm:flex hidden">
+        <span class="icon-[solar--alt-arrow-left-line-duotone] h-4 w-4 bg-primary"></span>
+    </button>
+    <div class="h-full pt-4 overflow-y-auto flex flex-col justify-between">
+        <div class="px-3">
+            <div class="flex items-center ps-2.5 mb-5 flex-col gap-3">
+                <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
+                     class="rounded-full object-cover w-16 h-16"
+                     alt="Foto usuario" />
+                <h3 class="text-white uppercase font-bold align-middle text-center">
+                    Julian Marino Trujillo Obregon
+                </h3>
+                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
+                    <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
+                    Cerrar sesión
+                </button>
+            </div>
+            <hr class="mb-4 border-gray-100 opacity-50" />
+            <ul class="font-medium" *ngFor="let page of pages">
+                <li *ngIf="!page.subPages">
+                    <button (click)="onNavigate(page.link)" routerLinkActive="bg-primary-500" routerLink={{page.link}}
+                            class="flex items-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
+                        <span
+                            class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                        {{ page.title }}
+                    </button>
+                </li>
+                <li hlmAccordion *ngIf="page.subPages">
+                    <div hlmAccordionItem class="flex border-none">
+                        <button hlmAccordionTrigger
+                                class="flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group hover:no-underline text-[16px]">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                                {{ page.title }}
+                            </div>
+                            <span
+                                class="icon-[solar--alt-arrow-down-bold] w-4 h-4 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                        </button>
+                        <brn-accordion-content hlm>
+                            <button *ngFor="let subPage of page.subPages" (click)="onNavigate(subPage.link)"
+                                    routerLinkActive="bg-primary-500" routerLink={{subPage.link}}
+                                    class="flex items-center p-2 pl-9 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition mb-1">
+                                {{ subPage.title }}
+                            </button>
+                        </brn-accordion-content>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="flex justify-center bg-primary py-2.5">
+            <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-p.png"
+                 alt="Universidad surcolombiana logo" />
+        </div>
+    </div>
+</aside>
