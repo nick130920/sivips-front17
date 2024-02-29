@@ -3,7 +3,8 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import Swal from 'sweetalert2';
+import { AuthService } from '@lib/services';
 /**
  * Interceptor that handles server errors.
  *
@@ -14,11 +15,13 @@ import { catchError } from 'rxjs/operators';
  */
 export const serverErrorInterceptor: HttpInterceptorFn = (request, next) => {
     const router = inject(Router);
-
+    const authService = inject(AuthService);
     return next(request).pipe(
         catchError((error: HttpErrorResponse) => {
             if ([HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(error.status)) {
-                router.navigateByUrl('/auth/login');
+                Swal.fire('Oopps', 'No tienes permisos para realizar esta acción', 'success');
+                authService.logout();
+                router.navigate(['/auth/login']);
             }
 
             return throwError(() => error);

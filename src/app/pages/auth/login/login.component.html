@@ -1,9 +1,19 @@
-<div class="container flex flex-col items-center justify-center h-full bg-amber-950">
-    <p class="mb-12 text-5xl text-center">You're not logged in!</p>
-    <button
-        class="inline-block h-12 px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none"
-        (click)="login()"
-    >
-        Login
-    </button>
+<div class="flex flex-col items-center justify-center h-screen bg-gris-100">
+    <div class="w-6/12 h-4/5 p-5 rounded-[0.375rem] shadow-2xl flex">
+        <div class="w-1/2 p-10">
+            <div>
+                <h2 class="font-bold text-2xl text-gris-700">Inicio de sesión</h2>
+                <p class="text-xs mt-3 text-gris-700">{{ faculty.facultyName }}</p>
+            </div>
+            <button hlmBtn (click)="login()">Button</button>
+            <div>
+                version - 1.0.0
+            </div>
+        </div>
+        <div class="w-1/2 bg-primary-800 rounded-[0.375rem] flex justify-center items-center">
+            <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-v.png"
+                 alt="Logo de la universidad Surcolombiana" class="filter-[red]">
+        </div>
+    </div>
+
 </div>

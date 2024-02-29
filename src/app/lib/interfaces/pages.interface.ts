@@ -9,3 +9,9 @@ export interface SubPages {
     title: string;
     link: string;
 }
+
+export interface Faculty {
+    id: number;
+    facultyName: string;
+    logoLink: string;
+}

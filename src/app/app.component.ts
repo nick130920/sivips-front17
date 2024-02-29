@@ -20,5 +20,6 @@ export class AppComponent {
         this._authService.isAuthenticated$.subscribe((isAuthenticated) => {
             this._isAuthenticated = isAuthenticated;
         });
+        console.log('AppComponent', this._isAuthenticated);
     }
 }

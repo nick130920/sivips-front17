@@ -7,4 +7,13 @@ export const routes: Routes = [
         loadChildren: async () => (await import('@pages/auth')).routes,
         canMatch: [authGuard({ requiresAuthentication: false })],
     },
+    {
+        path: '',
+        loadChildren: async () => (await import('@pages/home')).routes,
+        canMatch: [authGuard()],
+    },
+    {
+        path: '**',
+        redirectTo: 'home',
+    },
 ];

@@ -1,6 +1,6 @@
 <app-sidebar-big *ngIf="!isMallSide" class="transition delay-700 duration-300 ease-in-out"></app-sidebar-big>
 <app-sidebar-small *ngIf="isMallSide"></app-sidebar-small>
-<div class="p-4 {{isMallSide ? 'sm:ml-16' : 'sm:ml-64'}}">
-    <!--CONTENIDO-->
-    asdasd
+<div class="{{isMallSide ? 'sm:ml-16' : 'sm:ml-64'}}">
+    <ng-content></ng-content>
+    <button (click)="test()">TESTING</button>
 </div>

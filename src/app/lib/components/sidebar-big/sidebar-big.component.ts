@@ -1,29 +1,20 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
-import {
-    HlmAccordionContentDirective,
-    HlmAccordionDirective,
-    HlmAccordionItemDirective,
-    HlmAccordionTriggerDirective,
-} from '@lib/ui/ui-accordion-helm/src';
-import { HlmButtonDirective } from '@lib/ui/ui-button-helm/src';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { pages } from '@lib/utils';
 import { AuthService } from '@lib/services';
 import { SidebarChangerService } from '@lib/services/responsive/sidebar-changer.service';
-
+import { HlmAccordionModule } from '@lib/ui/ui-accordion-helm/src';
+import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 @Component({
     selector: 'app-sidebar-big',
     standalone: true,
     imports: [
         CommonModule,
+        HlmAccordionModule,
+        HlmButtonModule,
         BrnAccordionContentComponent,
-        HlmAccordionContentDirective,
-        HlmAccordionDirective,
-        HlmAccordionItemDirective,
-        HlmAccordionTriggerDirective,
-        HlmButtonDirective,
         RouterLink,
         RouterLinkActive,
     ],

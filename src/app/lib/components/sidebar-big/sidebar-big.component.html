@@ -29,12 +29,12 @@
             <hr class="mb-4 border-gray-100 opacity-50" />
             <ul class="font-medium" *ngFor="let page of pages">
                 <li *ngIf="!page.subPages">
-                    <button (click)="onNavigate(page.link)" routerLinkActive="bg-primary-500" routerLink={{page.link}}
-                            class="flex items-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
+                    <a routerLinkActive="bg-primary" routerLink={{page.link}}
+                            class="flex items-center p-2 my-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
                         <span
                             class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                         {{ page.title }}
-                    </button>
+                    </a>
                 </li>
                 <li hlmAccordion *ngIf="page.subPages">
                     <div hlmAccordionItem class="flex border-none">
@@ -49,11 +49,11 @@
                                 class="icon-[solar--alt-arrow-down-bold] w-4 h-4 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                         </button>
                         <brn-accordion-content hlm>
-                            <button *ngFor="let subPage of page.subPages" (click)="onNavigate(subPage.link)"
-                                    routerLinkActive="bg-primary-500" routerLink={{subPage.link}}
+                            <a *ngFor="let subPage of page.subPages"
+                                    routerLinkActive="bg-primary" routerLink={{subPage.link}}
                                     class="flex items-center p-2 pl-9 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition mb-1">
                                 {{ subPage.title }}
-                            </button>
+                            </a>
                         </brn-accordion-content>
                     </div>
                 </li>
