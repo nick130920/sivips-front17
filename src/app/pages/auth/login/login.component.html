@@ -1,19 +1,70 @@
-<div class="flex flex-col items-center justify-center h-screen bg-gris-100">
-    <div class="w-6/12 h-4/5 p-5 rounded-[0.375rem] shadow-2xl flex">
-        <div class="w-1/2 p-10">
-            <div>
-                <h2 class="font-bold text-2xl text-gris-700">Inicio de sesión</h2>
-                <p class="text-xs mt-3 text-gris-700">{{ faculty.facultyName }}</p>
-            </div>
-            <button hlmBtn (click)="login()">Button</button>
-            <div>
-                version - 1.0.0
+<div class="flex flex-col items-center justify-center h-screen bg-primary-900 ">
+    <div class="w-full max-w-md h-auto p-5 pb-0 rounded-lg shadow-2xl bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-all">
+        <div id="default-styled-tab-content" class="space-y-5">
+            <img class="rounded-t-lg" src="https://sanagustin.usco.edu.co/sivips_admin/resources/assets/img/usco-sivips.png" alt="Logo de la universidad Surcolombiana">
+            <h5 class="md:text-xl text-center font-bold text-primary sm:text-sm text-xs dark:text-primary">SISTEMA DE INVESTIGACIÓN Y PROYECCIÓN SOCIAL</h5>
+            <div class="w-full px-10">
+                <div class="hidden divide-y" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <form class="max-w-sm pt-2 mx-auto" autocomplete="off">
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input autocomplete="off" type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Usuario</label>
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input autocomplete="off" type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-primary-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contraseña</label>
+                        </div>
+                        <button hlmBtn (click)="login()" class="text-white bg-primary hover:bg-primary-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">INGRESAR</button>
+
+                    </form>
+                </div>
+
+                <div class="hidden divide-y" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <form class="max-w-sm  mx-auto" autocomplete="off">
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input autocomplete="off" type="password" name="floating_password" id="floating_passwordtwo" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_passwordtwo" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-primary-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Segunda Contraseña</label>
+                        </div>
+                        <button hlmBtn (click)="login()" class="text-white bg-primary hover:bg-primary-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">INGRESAR</button>
+
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="w-1/2 bg-primary-800 rounded-[0.375rem] flex justify-center items-center">
-            <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-v.png"
-                 alt="Logo de la universidad Surcolombiana" class="filter-[red]">
+        <div class="mt-4 w-auto border-gray-200 dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content"
+                data-tabs-active-classes="text-primary hover:text-primary dark:text-primary-500 dark:hover:text-primary-500 dark:border-primary-500"
+                data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" role="tablist">
+                <div class="w-full max-w-full px-3 mx-auto my-12 flex-0 lg:w-8/12">
+                    <div class="grid grid-cols-2">
+                        <li class="me-2" role="presentation" >
+                            <button data-tabs-active-classes="text-primary" class="inline-block w-full p-4 border-b-2 rounded-t-lg
+                                        before:w-3.4 before:h-3.4 before:rounded-full before:scale-120  -indent-330
+                                relative m-0 cursor-pointer border-none bg-transparent px-1.5 pb-0.5 pt-5
+                                outline-none transition-all ease-linear before:absolute before:top-0 before:left-1/2
+                                before:z-30 before:box-border before:block before:-translate-x-1/2 before:border-8 before:border-solid
+                                before:border-current before:bg-current before:transition-all before:ease-linear before:content-['']
+                                after:absolute after:left-[calc(-50%+243px/2)]
+                                after:z-10 after:top-1.5 after:block after:h-0.5 after:w-1/2
+                                after:bg-current after:transition-all after:ease-linear after:content-[''] sm:indent-0"
+                                    id="profile-styled-tab" data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Primer contraseña</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button data-tabs-active-classes="text-primary"  class="inline-block w-full p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300
+                                    before:w-3.4 before:h-3.4 before:rounded-full before:scale-120 -indent-330
+                                    relative m-0 cursor-pointer border-none bg-transparent px-1.5 pb-0.5 pt-5 
+                                    outline-none transition-all ease-linear before:absolute before:top-0 before:left-1/2
+                                    before:z-30 before:box-border before:block before:-translate-x-1/2 before:border-8 before:border-solid
+                                    before:border-current before:bg-current before:transition-all before:ease-linear before:content-['']
+                                    after:absolute after:left-[calc(-50%+110px/2)]
+                                    after:z-10 after:top-1.5 after:block after:h-0.5 after:w-1/2
+                                    after:bg-current after:transition-all after:ease-linear after:content-[''] sm:indent-0"
+                                    id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Segunda contraseña</button>
+                        </li>
+                    </div>
+                </div>
+            </ul>
         </div>
     </div>
-
 </div>
+
