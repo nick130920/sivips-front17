@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@lib/services';
 import { SidebarBigComponent } from '../sidebar-big/sidebar-big.component';
@@ -14,12 +14,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './sidebar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarComponent implements OnChanges {
-    private _isAuthenticated = false;
-    get isAuthenticated(): boolean {
-        return this._isAuthenticated;
-    }
-
+export class SidebarComponent {
     @ViewChild('sidebarBig') sidebar!: ElementRef<HTMLDivElement>;
     private _onSideChange: Subscription;
     isMallSide = false;
@@ -32,13 +27,6 @@ export class SidebarComponent implements OnChanges {
         this._onSideChange = this._sidebarService.buttonClicked$.subscribe(() => {
             this.onButtonClick();
         });
-        this._authService.isAuthenticated$.subscribe((isAuthenticated) => {
-            this._isAuthenticated = isAuthenticated;
-        });
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes, '----------');
     }
 
     onButtonClick(): void {
