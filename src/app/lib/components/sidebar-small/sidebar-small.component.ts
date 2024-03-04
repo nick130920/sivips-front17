@@ -7,6 +7,8 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '@lib/services';
 import { SidebarChangerService } from '@lib/services/responsive/sidebar-changer.service';
+import { HlmTooltipComponent, HlmTooltipTriggerDirective } from '@lib/ui/ui-tooltip-helm/src';
+import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
 
 @Component({
     selector: 'app-sidebar-small',
@@ -18,6 +20,9 @@ import { SidebarChangerService } from '@lib/services/responsive/sidebar-changer.
         HlmButtonModule,
         RouterLink,
         RouterLinkActive,
+        HlmTooltipComponent,
+        HlmTooltipTriggerDirective,
+        BrnTooltipContentDirective,
     ],
     templateUrl: './sidebar-small.component.html',
 })

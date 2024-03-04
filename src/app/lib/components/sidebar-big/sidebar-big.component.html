@@ -21,10 +21,6 @@
                 <h3 class="text-white uppercase font-bold align-middle text-center">
                     Julian Marino Trujillo Obregon
                 </h3>
-                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
-                    <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
-                    Cerrar sesión
-                </button>
             </div>
             <hr class="mb-4 border-gray-100 opacity-50" />
             <ul class="font-medium" *ngFor="let page of pages">
@@ -59,9 +55,16 @@
                 </li>
             </ul>
         </div>
-        <div class="flex justify-center py-2.5">
-            <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-p.png"
-                 alt="Universidad surcolombiana logo" />
+        <div class="flex flex-col justify-center py-2.5 ">
+            <div class="ps-2.5 mb-5 gap-3 px-3">
+                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
+                    <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
+                    Cerrar sesión
+                </button>
+            </div>
+            <div class="flex justify-center">
+                <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-p.png" alt="Universidad surcolombiana logo" />
+            </div>
         </div>
     </div>
 </aside>
