@@ -10,18 +10,26 @@
                 <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
                      class="rounded-full object-cover w-12 h-12"
                      alt="Foto usuario" />
-                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1 p-0.5" (click)="onClickSignOut()">
-                    <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
-                </button>
+
             </div>
             <hr class="mb-4 border-gray-100 opacity-50" />
-            <ul class="font-medium" *ngFor="let page of pages" (mouseenter)="onBigSidebar()">
+            <ul class="font-medium" *ngFor="let page of pages" ><!--(mouseenter)="onBigSidebar()"-->
                 <li *ngIf="!page.subPages">
-                    <button routerLinkActive="bg-primary-500" routerLink={{page.link}}
+
+                    <hlm-tooltip>
+                        <button hlmTooltipTrigger position="after" aria-describedby="{{page.title}}" routerLinkActive="bg-primary-700" routerLink={{page.link}}
+                                class="flex items-center justify-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
+                            <span class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75">
+                            </span>
+                        </button>
+                        <span *brnTooltipContent>{{page.title}}</span>
+                    </hlm-tooltip>
+
+                    <!--<button routerLinkActive="bg-primary-500" routerLink={{page.link}}
                             class="flex items-center justify-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
                         <span
                             class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
-                    </button>
+                    </button>-->
                 </li>
                 <li hlmAccordion *ngIf="page.subPages">
                     <div hlmAccordionItem class="flex border-none">
@@ -43,9 +51,14 @@
                 </li>
             </ul>
         </div>
-        <div class="flex justify-center bg-primary py-2.5 px-1">
-            <img src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-vp.png"
-                 alt="Universidad surcolombiana logo" />
+        <div class="px-2 flex items-center mb-5 flex-col gap-3">
+            <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1 p-0.5" (click)="onClickSignOut()">
+                <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
+            </button>
+            <div class="flex justify-center py-2.5 px-1">
+                <img src="https://www.usco.edu.co/imagen-institucional/favicon.ico"
+                     alt="Universidad surcolombiana logo" />
+            </div>
         </div>
     </div>
 </aside>
