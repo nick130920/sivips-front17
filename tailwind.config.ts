@@ -5,6 +5,7 @@ const TAILWIND_PLUGINS = [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
+    require('flowbite/plugin')
 ];
 
 const CUSTOM_PLUGINS = [addDynamicIconSelectors()];
@@ -47,7 +48,7 @@ const THEME = {
 /** @type {import('tailwindcss').Config} */
 export default {
     presets: [require('@spartan-ng/ui-core/hlm-tailwind-preset')],
-    content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}', './src/app/lib/components/**/*.{html,ts}'],
+    content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}', './src/app/lib/components/**/*.{html,ts}',"./node_modules/flowbite/**/*.js",],
     darkMode: 'class',
     theme: {
         fontFamily: {
