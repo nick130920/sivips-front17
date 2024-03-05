@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { storage } from '@lib/utils/storage/storage.utils';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '@env/environment';
 @Injectable({
@@ -23,10 +23,28 @@ export class AuthService {
         this._http
             .post(url, body.toString(), {
                 headers,
+                observe: 'response',
             })
-            .subscribe((response) => {
-                console.log(response);
-            });
+            .pipe(
+                tap((response) => {
+                    console.log(response);
+                    // Extrae los encabezados de la respuesta
+                    const responseHeaders = response.headers;
+                    console.log(responseHeaders);
+
+                    // Extrae el token del encabezado deseado (en este caso, 'authorization')
+                    const token = responseHeaders.get('Authorization');
+
+                    if (token) {
+                        console.log('Token extraído:', token);
+                        // Utiliza el token para acciones adicionales (almacenamiento seguro, enviar a otra solicitud, etc.)
+                    } else {
+                        console.error('Token no encontrado en los encabezados de la respuesta');
+                        // Maneja el caso en el que el token esté ausente
+                    }
+                }),
+            )
+            .subscribe();
         storage.setItem('appSession', { user: 'some-user-id', token: 'abc' });
         this.isAuthenticated$.next(true);
     }

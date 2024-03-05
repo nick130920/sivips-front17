@@ -17,10 +17,8 @@ export class LoginComponent implements OnInit {
     @Input() returnUrl!: string;
     faculty!: Faculty;
     loginForm = new FormGroup({
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        username: new FormControl('', [Validators.required]),
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        password: new FormControl('', [Validators.required]),
+        username: new FormControl('', [Validators.required.bind(Validators)]),
+        password: new FormControl('', [Validators.required.bind(Validators)]),
     });
     constructor(
         private readonly _router: Router,
@@ -30,8 +28,8 @@ export class LoginComponent implements OnInit {
     firstStepLogin(): void {
         if (this.loginForm.valid) {
             this._authService.login(this.loginForm.value.username as string, this.loginForm.value.password as string);
+            this._router.navigate(['/home']);
         }
-        this._router.navigate(['/home']);
     }
     secondStepLogin(): void {
         // this._authService.login();
