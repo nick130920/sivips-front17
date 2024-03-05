@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WizardComponent } from '@lib/components/wizard/wizard.component';
 import { WizardStep } from '@lib/interfaces';
+import { WizardControllerService } from '@lib/components/wizard/wizard-controller.service';
 @Component({
     selector: 'app-token',
     standalone: true,
@@ -9,14 +10,18 @@ import { WizardStep } from '@lib/interfaces';
 })
 export class TokenComponent {
     public steps: WizardStep[] = [
-        { title: 'Step 1', description: 'This is step 1', completed: true },
-        { title: 'Step 2', description: 'This is step 2', completed: true },
-        { title: 'Step 3', description: 'This is step 3', completed: true },
-        { title: 'Step 4', description: 'This is step 4', completed: true },
-        { title: 'Step 5', description: 'This is step 5', completed: true },
-        { title: 'Step 6', description: 'This is step 6', completed: false, isCurrent: true },
+        { title: 'Step 1', description: 'This is step 1' },
+        { title: 'Step 2', description: 'This is step 2' },
+        { title: 'Step 3', description: 'This is step 3' },
+        { title: 'Step 4', description: 'This is step 4' },
+        { title: 'Step 5', description: 'This is step 5' },
+        { title: 'Step 6', description: 'This is step 6' },
     ];
-    constructor() {
-        console.log('TokenComponent', this.steps);
+    constructor(private _wizardController: WizardControllerService) {}
+    nextStep(): void {
+        this._wizardController.nextStep();
+    }
+    previousStep(): void {
+        this._wizardController.previousStep();
     }
 }
