@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 @import 'sweetAlert2/sweetAlertTheme.css';
+
 html {
     font-family: 'Open Sans', sans-serif;
 }
