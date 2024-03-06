@@ -1,6 +1,10 @@
-export interface WizardStep {
+export interface Wizard {
     title: string;
     description: string;
-    isCompleted?: boolean;
-    isCurrent?: boolean;
+}
+
+export interface WizardStep extends Wizard {
+    id: number;
+    isCompleted: boolean;
+    isCurrent: boolean;
 }
