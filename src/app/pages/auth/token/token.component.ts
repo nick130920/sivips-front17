@@ -11,6 +11,7 @@ import { WizardControllerService } from '@lib/components/wizard/wizard-controlle
 })
 export class TokenComponent {
     public steps: Wizard[] = [
+
         { title: 'Step 1', description: 'This is step 1' },
         { title: 'Step 2', description: 'This is step 2' },
         { title: 'Step 3', description: 'This is step 3' },

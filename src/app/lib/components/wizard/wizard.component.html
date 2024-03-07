@@ -1,6 +1,7 @@
 <div class="h-1 flex items-center m-10 w-full">
 
     @for (step of stepsArray; track steps; let i = $index) {
+           
         <div [ngClass]="{
                       'bg-indigo-700': step.isCompleted && i !== steps.length - 1,
                       'bg-gray-200': !step.isCompleted && i !== steps.length - 1,
@@ -13,6 +14,7 @@
         </div>
         <app-empty-dot [step]="step"
                        *ngIf="i === steps.length - 1 && !step.isCurrent && !step.isCompleted" (click)="handleClickOnStep(step.id)"></app-empty-dot>
+
     }
 
 </div>

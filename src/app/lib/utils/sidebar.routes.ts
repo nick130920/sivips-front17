@@ -1,7 +1,7 @@
 import { Pages } from '@lib/interfaces';
 
 export const pages: Pages[] = [
-    { title: 'Home', link: '/', icon: 'icon-[solar--home-2-bold]' },
+    { title: 'Home', link: '/dashboard/home', icon: 'icon-[solar--home-2-bold]' },
     {
         title: 'Documents',
         subPages: [{ title: 'About', link: '/about' }],

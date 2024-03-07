@@ -16,6 +16,7 @@ export class WizardComponent implements OnInit {
     @Input() public steps: Wizard[] = [];
     public stepsArray: WizardStep[] = [];
 
+
     constructor(private _wizardController: WizardControllerService) {
         this._wizardController.nextStep$.subscribe(() => this.nextStep());
         this._wizardController.previousStep$.subscribe(() => this.previousStep());

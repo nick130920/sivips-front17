@@ -20,7 +20,7 @@ export const jwtInterceptor: HttpInterceptorFn = (request, next) => {
         const clonedRequest = request.clone({
             setHeaders: {
                 // eslint-disable-next-line @typescript-eslint/naming-convention
-                Authorization: `Bearer ${'JWT TOKEN'}`,
+                Authorization: `${'JWT TOKEN'}`,
             },
         });
 

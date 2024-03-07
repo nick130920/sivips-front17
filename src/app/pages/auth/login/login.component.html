@@ -1,42 +1,70 @@
-<div class="flex items-center flex-col justify-center h-screen bg-primary-900">
-    <div class="bg-white flex flex-col p-11
-                lg:w-[1040px] md:w-[840px] sm:w-[480px] w-full
-                md:h-[384px] sm:h-[528px] h-full
-                sm:rounded-[28px]
-                rotate-0">
-        <div class="w-full flex flex-row h-4/5">
-            <div class="w-1/2 flex flex-col gap-4">
-                <img src="assets/img/USCOLogo.svg" alt="usco-logo" class="w-[58px] h-[58px]">
-                <h1 class="text-5xl font-medium">Inicia sesión</h1>
-                <p>Ir a <span class="text-blue-700">planes academicos</span></p>
-            </div>
-            <div class="w-1/2 flex flex-col align-middle justify-center">
-                <form>
-                    <div class="relative z-0 w-full mb-3 group">
-                        <input type="text" name="repeat_password" id="floating_user"
-                               class="input-floating peer"
-                               placeholder="" required autocomplete="new-password" />
-                        <label for="floating_user"
-                               class="label-floating">
-                            Usuario
-                        </label>
-                    </div>
-                    <div class="relative z-0 w-full group">
-                        <input type="password" name="repeat_password" id="floating_repeat_password"
-                               class="input-floating peer mb-1.5"
-                               placeholder=" " required autocomplete="new-password" />
-                        <label for="floating_repeat_password"
-                               class="label-floating">
-                            Primera contraseña</label>
-                        <a href="https://www.usco.edu.co/cambio_clave/"
-                           class="text-blue-800 font-bold text-sm hover:bg-blue-50 p-0.5 rounded-lg"> ¿Olvidó su
-                            primera contraseña? </a>
-                    </div>
-                </form>
+<div class="flex flex-col items-center justify-center h-screen bg-primary-900 ">
+    <div class="w-full max-w-md h-auto p-5 pb-0 rounded-lg shadow-2xl bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-all">
+        <div id="tab-form-login" class="space-y-5">
+            <img class="rounded-t-lg" src="https://sanagustin.usco.edu.co/sivips_admin/resources/assets/img/usco-sivips.png" alt="Logo de la universidad Surcolombiana">
+            <h5 class="md:text-xl text-center font-bold text-primary sm:text-sm text-xs dark:text-primary">SISTEMA DE INVESTIGACIÓN Y PROYECCIÓN SOCIAL</h5>
+            <div class="w-full px-10">
+                <div class="hidden divide-y" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <form class="max-w-sm pt-2 mx-auto" autocomplete="off" method="post" [formGroup]="loginForm" (ngSubmit)="firstStepLogin()">
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input formControlName="username" autocomplete="off" type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Usuario</label>
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input formControlName="password" autocomplete="off" type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-primary-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contraseña</label>
+                        </div>
+                        <button hlmBtn type="submit" class="text-white bg-primary hover:bg-primary-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">INGRESAR</button>
+
+                    </form>
+                </div>
+
+                <div class="hidden divide-y" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <form class="max-w-sm  mx-auto" autocomplete="off">
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input autocomplete="off" type="password" name="floating_password" id="floating_passwordtwo" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" placeholder=" " required />
+                            <label for="floating_passwordtwo" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-primary-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Segunda Contraseña</label>
+                        </div>
+                        <button hlmBtn (click)="secondStepLogin()" class="text-white bg-primary hover:bg-primary-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">INGRESAR</button>
+
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="w-full h-1/5 flex flex-row-reverse">
-            <button hlmBtn>Siguiente</button>
+        <div class="mt-4 w-auto border-gray-200 dark:border-gray-700">
+            <ul class="" id="default-styled-tab"
+                data-tabs-toggle="#tab-form-login"
+                data-tabs-active-classes=""
+                data-tabs-inactive-classes="" role="tablist">
+                <div class="w-full max-w-full mx-auto my-12 lg:w-8/12">
+
+                    <app-wizard [steps]="steps" [tabId]="tabId"></app-wizard>
+
+                    <li role="presentation">
+                        <button
+                            data-tabs-active-classes="text-primary"
+                            id="profile-styled-tab"
+                            data-tabs-target="#styled-profile"
+                            type="button" role="tab"
+                            aria-controls="profile"
+                            aria-selected="false">
+
+                        </button>
+                    </li>
+                    <li role="presentation">
+                        <button
+                            data-tabs-active-classes="text-primary"
+                            id="dashboard-styled-tab"
+                            data-tabs-target="#styled-dashboard"
+                            type="button"
+                            role="tab"
+                            aria-controls="dashboard"
+                            aria-selected="false">
+
+                        </button>
+                    </li>
+                </div>
+            </ul>
         </div>
 
     </div>

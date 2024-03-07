@@ -14,12 +14,12 @@
     </button>
     <div class="h-full pt-4 overflow-y-auto flex flex-col justify-between">
         <div class="px-3">
-            <div class="flex items-center ps-2.5 mb-5 flex-col gap-3">
+            <div class="flex items-center px-2.5 mb-5 flex-row gap-5">
                 <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
-                     class="rounded-full object-cover w-16 h-16"
+                     class="rounded-full object-cover w-12 h-12"
                      alt="Foto usuario" />
-                <h3 class="text-white uppercase font-bold align-middle text-center">
-                    Julian Marino Trujillo Obregon
+                <h3 class="text-white font-bold align-middle text-center">
+                    Nicolas Muñoz
                 </h3>
             </div>
             <hr class="mb-4 border-gray-100 opacity-50" />
@@ -57,7 +57,7 @@
         </div>
         <div class="flex flex-col justify-center py-2.5 ">
             <div class="ps-2.5 mb-5 gap-3 px-3">
-                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
+                <button hlmBtn variant='outline' class="w-full font-bold hover:text-red-800 text-white gap-1" (click)="onClickSignOut()">
                     <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
                     Cerrar sesión
                 </button>

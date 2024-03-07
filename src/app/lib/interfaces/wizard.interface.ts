@@ -7,4 +7,5 @@ export interface WizardStep extends Wizard {
     id: number;
     isCompleted: boolean;
     isCurrent: boolean;
+
 }
