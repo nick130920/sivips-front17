@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import 'sweetAlert2/sweetAlertTheme.css';
+/* Mandatory */
+@import 'ng-wizard/themes/ng_wizard.min.css';
+
+/* Optional */
+/* If a theme other than default is used, the css file for that theme is required. */
+@import 'ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import 'ng-wizard/themes/ng_wizard_theme_circles.min.css';
+@import 'ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
 
 @tailwind base;
 @tailwind components;

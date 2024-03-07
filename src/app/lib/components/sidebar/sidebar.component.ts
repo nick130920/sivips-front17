@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@lib/services';
-import { SidebarBigComponent } from '../sidebar-big/sidebar-big.component';
-import { SidebarSmallComponent } from '../sidebar-small/sidebar-small.component';
+import { SidebarBigComponent } from '@lib/components/sidebar/sidebar-big/sidebar-big.component';
+import { SidebarSmallComponent } from '@lib/components/sidebar/sidebar-small/sidebar-small.component';
 import { SidebarChangerService } from '@lib/services/responsive/sidebar-changer.service';
 import { Subscription } from 'rxjs';
 

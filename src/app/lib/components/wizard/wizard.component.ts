@@ -14,6 +14,7 @@ import { WizardControllerService } from '@lib/components/wizard/wizard-controlle
 })
 export class WizardComponent implements OnInit {
     @Input() public steps: WizardStep[] = [];
+    @Input() tabId: string = '';
 
     constructor(private _wizardController: WizardControllerService) {
         this._wizardController.nextStep$.subscribe(() => this.nextStep());
