@@ -7,8 +7,7 @@ import { Faculty, WizardStep } from '@lib/interfaces';
 import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 import { initFlowbite } from 'flowbite';
 import { FormControl, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { WizardControllerService } from '@lib/components/wizard/wizard-controller.service';
-import { WizardComponent } from '@lib/components/wizard/wizard.component';
+
 
 @Component({
     standalone: true,
@@ -19,11 +18,6 @@ export class LoginComponent implements OnInit {
     @Input() returnUrl!: string;
     faculty!: Faculty;
 
-    public steps: WizardStep[] = [
-        { title: 'Step 1', description: 'This is step 1' },
-        { title: 'Step 2', description: 'This is step 2' },
-    ];
-    public tabId = 'tab-form-login';
 
     loginForm = new FormGroup({
         username: new FormControl('', Validators.required.bind(Validators)),

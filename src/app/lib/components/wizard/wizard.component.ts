@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EmptyDotComponent } from '@lib/components/wizard/empty-dot/empty-dot.component';
 import { SelectedPointComponent } from '@lib/components/wizard/selected-point/selected-point.component';
 import { FullDotComponent } from '@lib/components/wizard/full-dot/full-dot.component';
-import { WizardStep } from '@lib/interfaces';
+import { Wizard, WizardStep } from '@lib/interfaces';
 import { CommonModule } from '@angular/common';
 import { WizardControllerService } from '@lib/components/wizard/wizard-controller.service';
 
@@ -13,8 +13,9 @@ import { WizardControllerService } from '@lib/components/wizard/wizard-controlle
     templateUrl: './wizard.component.html',
 })
 export class WizardComponent implements OnInit {
-    @Input() public steps: WizardStep[] = [];
-    @Input() tabId: string = '';
+    @Input() public steps: Wizard[] = [];
+    public stepsArray: WizardStep[] = [];
+
 
     constructor(private _wizardController: WizardControllerService) {
         this._wizardController.nextStep$.subscribe(() => this.nextStep());
@@ -22,34 +23,50 @@ export class WizardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.steps = this.steps.map((step, index) => ({ ...step, isCompleted: false, isCurrent: index === 0 }));
+        this.stepsArray = this.steps.map((step, index) => ({
+            ...step,
+            id: index + 1,
+            isCompleted: false,
+            isCurrent: index === 0,
+        }));
+        // this.steps = this.steps.map((step, index) => ({ ...step, isCompleted: false, isCurrent: index === 0 }));
     }
 
     nextStep(): void {
-        const currentStepIndex = this.steps.findIndex((step) => step.isCurrent);
+        const currentStepIndex = this.stepsArray.findIndex((step: WizardStep) => step.isCurrent);
         if (currentStepIndex === -1) {
             return;
         }
-        if (currentStepIndex === this.steps.length - 1) {
-            this.steps[currentStepIndex].isCurrent = false;
-            this.steps[currentStepIndex].isCompleted = true;
+        if (currentStepIndex === this.stepsArray.length - 1) {
+            this.stepsArray[currentStepIndex].isCurrent = false;
+            this.stepsArray[currentStepIndex].isCompleted = true;
             return;
         }
-        if (currentStepIndex < this.steps.length - 1) {
-            this.steps[currentStepIndex].isCurrent = false;
-            this.steps[currentStepIndex].isCompleted = true;
-            this.steps[currentStepIndex + 1].isCurrent = true;
+        if (currentStepIndex < this.stepsArray.length - 1) {
+            this.stepsArray[currentStepIndex].isCurrent = false;
+            this.stepsArray[currentStepIndex].isCompleted = true;
+            this.stepsArray[currentStepIndex + 1].isCurrent = true;
             return;
         }
     }
 
     previousStep(): void {
-        const currentStepIndex = this.steps.findIndex((step) => step.isCurrent);
+        const currentStepIndex = this.stepsArray.findIndex((step) => step.isCurrent);
         if (currentStepIndex > 0) {
-            this.steps[currentStepIndex].isCurrent = false;
-            this.steps[currentStepIndex - 1].isCurrent = true;
-            this.steps[currentStepIndex - 1].isCompleted = false;
+            this.stepsArray[currentStepIndex].isCurrent = false;
+            this.stepsArray[currentStepIndex - 1].isCurrent = true;
+            this.stepsArray[currentStepIndex - 1].isCompleted = false;
             return;
+        }
+    }
+
+    handleClickOnStep(step: number): void {
+        const currentStep = this.stepsArray.find((s: WizardStep) => s.id === step);
+        if (currentStep) {
+            this.stepsArray.forEach((s) => {
+                s.isCurrent = s.id === currentStep.id;
+                s.isCompleted = s.id < currentStep.id;
+            });
         }
     }
 }
