@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
     private _apiUrl: string = environment.apiUrl;
     isAuthenticated$ = new BehaviorSubject<boolean>(!!storage.getItem('appSession'));
-    isModoAdmin$ = new BehaviorSubject<boolean>(!!storage.getItem('appSession')?.modo);
+    isModo$ = new BehaviorSubject<boolean>(!!storage.getItem('mode'));
 
     constructor(private _http: HttpClient) {}
     get isAuthenticated(): boolean {
@@ -18,7 +18,16 @@ export class AuthService {
     }
 
     get isModoAdmin(): boolean {
-        return this.isModoAdmin$.getValue();
+        const storedMode = sessionStorage.getItem('mode');
+        if (storedMode) {
+            this.isModo$.next(Boolean(storedMode));
+        } else {
+            this._http.get<boolean>(`${this._apiUrl}/api/mode`).subscribe((mode) => {
+                sessionStorage.setItem('mode', String(mode));
+                this.isModo$.next(mode);
+            });
+        }
+        return this.isModo$.getValue();
     }
 
     login(username: string, password: string): Observable<never> {
@@ -34,9 +43,9 @@ export class AuthService {
             })
             .pipe(
                 tap((response) => {
+                    console.log(response);
                     // Extrae los encabezados de la respuesta
                     const responseHeaders = response.headers;
-
                     // Extrae el token del encabezado deseado (en este caso, 'authorization')
                     const token = responseHeaders.get('Authorization');
                     if (token) {
@@ -44,14 +53,32 @@ export class AuthService {
                         console.log(decodedToken);
                         storage.setItem('appSession', decodedToken);
                         this.isAuthenticated$.next(true);
-                        if (storage.getItem('appSession')?.modo) {
-                            this.isModoAdmin$.next(true);
-                        }
                     } else {
                         console.error('Token no encontrado en los encabezados de la respuesta');
                     }
                 }),
             ) as Observable<never>;
+    }
+    secondLogin(password: string): Observable<never> {
+        const url = `${this._apiUrl}/segundopassword`;
+
+        return this._http.post(url, password, { observe: 'response' }).pipe(
+            tap((response) => {
+                // Extrae los encabezados de la respuesta
+                const responseHeaders = response.headers;
+
+                // Extrae el token del encabezado deseado (en este caso, 'authorization')
+                const token = responseHeaders.get('Authorization');
+                if (token) {
+                    const decodedToken = jwtDecode(token);
+                    console.log(decodedToken);
+                    storage.setItem('appSession', decodedToken);
+                    this.isAuthenticated$.next(true);
+                } else {
+                    console.error('Token no encontrado en los encabezados de la respuesta');
+                }
+            }),
+        ) as Observable<never>;
     }
 
     logout(): void {

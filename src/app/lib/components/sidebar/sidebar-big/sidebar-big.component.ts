@@ -26,7 +26,7 @@ export class SidebarBigComponent {
 
     constructor(
         private _router: Router,
-        private _authService: AuthService,
+        protected authService: AuthService,
         private _sidebarService: SidebarChangerService,
         private _renderer: Renderer2,
     ) {}
@@ -50,7 +50,7 @@ export class SidebarBigComponent {
             : sidebarClassList.add('transform-none');
     }
     onClickSignOut(): void {
-        this._authService.logout();
+        this.authService.logout();
         this._router.navigate(['/auth/login']);
     }
 }

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@lib/services';
-
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -19,5 +18,6 @@ export class AppComponent {
         this._authService.isAuthenticated$.subscribe((isAuthenticated) => {
             this._isAuthenticated = isAuthenticated;
         });
+        this._authService.isModoAdmin;
     }
 }

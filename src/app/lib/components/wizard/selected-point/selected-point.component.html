@@ -1,7 +1,7 @@
 <div (mouseenter)="onMouseOver()" (mouseleave)="onMouseOver()"
      class="bg-white h-6 w-6 rounded-full shadow flex items-center justify-center -mr-3 cursor-pointer">
 
-    <div class="h-3 w-3 bg-indigo-700 rounded-full"></div>
+    <div class="h-3 w-3 bg-primary-700 rounded-full"></div>
     @if (showTooltip) {
         <div class="absolute">
             <div class="relative bg-white shadow-lg px-2 py-1 rounded mt-16">
@@ -16,7 +16,7 @@
                         </g>
                     </g>
                 </svg>
-                <p tabindex="0" class="focus:outline-none text-indigo-700 text-xs font-bold">
+                <p tabindex="0" class="focus:outline-none text-primary-700 text-xs font-bold">
                    {{step?.title}}:
                     {{ step?.description }}
                 </p>

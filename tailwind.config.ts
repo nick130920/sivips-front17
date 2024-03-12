@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { addDynamicIconSelectors } from '@iconify/tailwind';
 
 const TAILWIND_PLUGINS = [
@@ -41,6 +40,7 @@ const THEME = {
         400: '#839198',
         500: '#4D626C',
         600: '#3B4B53',
+        650: '#2d3a40',
         700: '#1E262B',
     },
 };

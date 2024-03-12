@@ -16,7 +16,6 @@ export class WizardComponent implements OnInit {
     @Input() public steps: Wizard[] = [];
     public stepsArray: WizardStep[] = [];
 
-
     constructor(private _wizardController: WizardControllerService) {
         this._wizardController.nextStep$.subscribe(() => this.nextStep());
         this._wizardController.previousStep$.subscribe(() => this.previousStep());
@@ -29,7 +28,7 @@ export class WizardComponent implements OnInit {
             isCompleted: false,
             isCurrent: index === 0,
         }));
-        // this.steps = this.steps.map((step, index) => ({ ...step, isCompleted: false, isCurrent: index === 0 }));
+        console.log(this.stepsArray);
     }
 
     nextStep(): void {
@@ -46,6 +45,7 @@ export class WizardComponent implements OnInit {
             this.stepsArray[currentStepIndex].isCurrent = false;
             this.stepsArray[currentStepIndex].isCompleted = true;
             this.stepsArray[currentStepIndex + 1].isCurrent = true;
+            this._wizardController.tabSignal.set(this.stepsArray[currentStepIndex + 1].id);
             return;
         }
     }
@@ -58,15 +58,19 @@ export class WizardComponent implements OnInit {
             this.stepsArray[currentStepIndex - 1].isCompleted = false;
             return;
         }
+        this._wizardController.tabSignal.set(currentStepIndex);
     }
 
     handleClickOnStep(step: number): void {
         const currentStep = this.stepsArray.find((s: WizardStep) => s.id === step);
         if (currentStep) {
-            this.stepsArray.forEach((s) => {
-                s.isCurrent = s.id === currentStep.id;
-                s.isCompleted = s.id < currentStep.id;
-            });
+            if (currentStep.clickable) {
+                this.stepsArray.forEach((s) => {
+                    s.isCurrent = s.id === currentStep.id;
+                    s.isCompleted = s.id < currentStep.id;
+                });
+                this._wizardController.tabSignal.set(currentStep.id);
+            }
         }
     }
 }

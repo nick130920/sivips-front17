@@ -2,12 +2,12 @@
     <button hlmBtn variant='outline' class="font-bold text-white" (click)="toggleSidebar()">
         <span class="icon-[solar--hamburger-menu-linear] h-6 w-6"></span>
     </button>
-    <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
+    <img src="https://sanagustin.usco.edu.co/planes_academicos/obtenerFoto/138221"
          class="mr-1 h-10 w-10 rounded-full object-cover p-1"
          alt="foto usuario" />
 </div>
 <aside #sidebarBig (mouseleave)="toggleSideBarMouseOver()"
-       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gris-700">
+       class="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gris-700">
     <button (click)="onBigSidebar()"
             class="absolute right-[-12px] top-[25px] border-gris-700 border-2 bg-white rounded-full w-8 h-8 justify-center items-center sm:flex hidden">
         <span class="icon-[solar--alt-arrow-left-line-duotone] h-6 w-6 bg-primary"></span>
@@ -15,42 +15,56 @@
     <div class="h-full pt-4 overflow-y-auto flex flex-col justify-between">
         <div class="px-3">
             <div class="flex items-center px-2.5 mb-5 flex-row gap-5">
-                <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
+                <img src="https://sanagustin.usco.edu.co/planes_academicos/obtenerFoto/138221"
                      class="rounded-full object-cover w-12 h-12"
                      alt="Foto usuario" />
-                <h3 class="text-white font-bold align-middle text-center">
-                    Nicolas Muñoz
-                </h3>
+                <div class="flex flex-col justify-center">
+                    <h3 class="text-white font-bold align-middle text-center">
+                        Nicolas Muñoz
+                    </h3>
+                    <h5 class="text-white font-normal align-middle text-center">
+                        @if (this.authService.isModoAdmin){
+                            Administrador
+                        } @else {
+                            Docente
+                        }
+                    </h5>
+                </div>
             </div>
             <hr class="mb-4 border-gray-100 opacity-50" />
-            <ul class="font-medium" *ngFor="let page of pages">
-                <li *ngIf="!page.subPages">
-                    <a routerLinkActive="bg-gris-600" routerLink={{page.link}}
-                            class="flex items-center p-2 my-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-500 transition group">
+            <ul>
+                <li *ngFor="let page of pages" class="font-medium pb-2">
+                    <a *ngIf="!page.subPages" routerLinkActive="bg-gris-600 outline outline-2 outline-gris-400" routerLink={{page.link}}
+                            class="duration-300 flex items-center  p-2 my-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-500 transition group">
                         <span
                             class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                         {{ page.title }}
                     </a>
-                </li>
-                <li hlmAccordion *ngIf="page.subPages">
-                    <div hlmAccordionItem class="flex border-none">
-                        <button hlmAccordionTrigger
-                                class="flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group hover:no-underline text-[16px]">
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
-                                {{ page.title }}
-                            </div>
-                            <span
-                                class="icon-[solar--alt-arrow-down-bold] w-4 h-4 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
-                        </button>
-                        <brn-accordion-content hlm>
-                            <a *ngFor="let subPage of page.subPages"
-                                    routerLinkActive="bg-primary" routerLink={{subPage.link}}
-                                    class="flex items-center p-2 pl-9 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition mb-1">
-                                {{ subPage.title }}
-                            </a>
-                        </brn-accordion-content>
+                    <div hlmAccordion *ngIf="page.subPages">
+                        <div hlmAccordionItem class="flex border-none">
+                            <button hlmAccordionTrigger
+                                    class="[&[data-state=open]]:bg-gris-650 flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-650 transition group hover:no-underline text-[16px]">
+                                <div class="flex items-center gap-2">
+                                    <span class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                                        {{ page.title }}
+                                </div>
+                                <span hlmAccordionIcon
+                                    class="icon-[solar--alt-arrow-down-bold] w-4 h-4 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                            </button>
+                            <brn-accordion-content hlm class="ml-6">
+                                <ul>
+                                    <li *ngFor="let subPage of page.subPages">
+                                        <a
+                                           routerLinkActive="bg-gris-600 outline outline-2 outline-gris-500" routerLink={{subPage.link}}
+                                           class="flex items-center p-2 pl-9 mx-0.5 rounded-lg group w-auto text-white gap-2 group hover:bg-gris-400 transition mb-1">
+                                            {{ subPage.title }}
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </brn-accordion-content>
+                        </div>
                     </div>
                 </li>
             </ul>

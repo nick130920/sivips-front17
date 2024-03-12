@@ -19,7 +19,9 @@ export const serverErrorInterceptor: HttpInterceptorFn = (request, next) => {
     return next(request).pipe(
         catchError((error: HttpErrorResponse) => {
             if ([HttpStatusCode.Unauthorized, HttpStatusCode.Forbidden].includes(error.status)) {
-                Swal.fire('Oopps', 'No tienes permisos para realizar esta acción', 'success');
+                if (!error.error) {
+                    Swal.fire('Oopps', 'No tienes permisos para realizar esta acción', 'success');
+                }
                 authService.logout();
                 router.navigate(['/auth/login']);
             }

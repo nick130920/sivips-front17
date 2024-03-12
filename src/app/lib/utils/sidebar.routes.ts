@@ -4,8 +4,8 @@ export const pages: Pages[] = [
     { title: 'Home', link: '/dashboard/home', icon: 'icon-[solar--home-2-bold]' },
     {
         title: 'Documents',
-        subPages: [{ title: 'About', link: '/about' }],
+        subPages: [{ title: 'About', link: '/about/' }],
         icon: 'icon-[solar--document-bold]',
     },
-    { title: 'Dashboard', link: '/dashboard', icon: 'icon-[solar--home-2-bold]' },
+    // { title: 'Dashboard', link: '/dashboard', icon: 'icon-[solar--home-2-bold]' },
 ];

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class WizardControllerService {
 
     private _previousStep = new Subject<void>();
     previousStep$ = this._previousStep.asObservable();
-
+    tabSignal = signal(1);
     nextStep(): void {
         this._nextStep.next();
     }
