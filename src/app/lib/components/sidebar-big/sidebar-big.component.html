@@ -1,5 +1,5 @@
 <div class="sm:hidden w-full bg-gris-700 align-middle flex justify-between">
-    <button hlmBtn variant='outline' class="font-bold text-white" (click)="toggleSidebar()">
+    <button  class="font-bold text-white" (click)="toggleSidebar()">
         <span class="icon-[solar--hamburger-menu-linear] h-6 w-6"></span>
     </button>
     <img src="https://live.staticflickr.com/3540/3393694735_3f4d79ce35_c.jpg"
@@ -32,9 +32,9 @@
                         {{ page.title }}
                     </a>
                 </li>
-                <li hlmAccordion *ngIf="page.subPages">
-                    <div hlmAccordionItem class="flex border-none">
-                        <button hlmAccordionTrigger
+                <li  *ngIf="page.subPages">
+                    <div  class="flex border-none">
+                        <button
                                 class="flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group hover:no-underline text-[16px]">
                             <div class="flex items-center gap-2">
                                 <span
@@ -44,20 +44,20 @@
                             <span
                                 class="icon-[solar--alt-arrow-down-bold] w-4 h-4 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                         </button>
-                        <brn-accordion-content hlm>
+                        <!--<brn-accordion-content >
                             <a *ngFor="let subPage of page.subPages"
                                     routerLinkActive="bg-primary" routerLink={{subPage.link}}
                                     class="flex items-center p-2 pl-9 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition mb-1">
                                 {{ subPage.title }}
                             </a>
-                        </brn-accordion-content>
+                        </brn-accordion-content>-->
                     </div>
                 </li>
             </ul>
         </div>
         <div class="flex flex-col justify-center py-2.5 ">
             <div class="ps-2.5 mb-5 gap-3 px-3">
-                <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
+                <button  class="w-full font-bold text-white gap-1" (click)="onClickSignOut()">
                     <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
                     Cerrar sesión
                 </button>

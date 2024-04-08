@@ -1,7 +1,7 @@
 <aside #asideSmall
        class="fixed top-0 left-0 z-40 w-16 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gris-700">
     <button (click)="onBigSidebar()"
-        class="absolute right-[-12px] top-[25px] border-gris-700 border-2 bg-white rounded-full w-7 h-7 justify-center items-center sm:flex hidden">
+            class="absolute right-[-12px] top-[25px] border-gris-700 border-2 bg-white rounded-full w-7 h-7 justify-center items-center sm:flex hidden">
         <span class="icon-[solar--alt-arrow-right-line-duotone] h-4 w-4 bg-primary"></span>
     </button>
     <div class="h-full pt-4 overflow-y-auto flex flex-col justify-between">
@@ -13,46 +13,46 @@
 
             </div>
             <hr class="mb-4 border-gray-100 opacity-50" />
-            <ul class="font-medium" *ngFor="let page of pages" ><!--(mouseenter)="onBigSidebar()"-->
+            <ul class="font-medium" *ngFor="let page of pages"><!--(mouseenter)="onBigSidebar()"-->
                 <li *ngIf="!page.subPages">
 
-                    <hlm-tooltip>
-                        <button hlmTooltipTrigger position="after" aria-describedby="{{page.title}}" routerLinkActive="bg-primary-700" routerLink={{page.link}}
-                                class="flex items-center justify-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
-                            <span class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75">
-                            </span>
-                        </button>
-                        <span *brnTooltipContent>{{page.title}}</span>
-                    </hlm-tooltip>
-
+                    <!--    <hlm-tooltip>
+                            <button hlmTooltipTrigger position="after" aria-describedby="{{page.title}}" routerLinkActive="bg-primary-700" routerLink={{page.link}}
+                                    class="flex items-center justify-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
+                                <span class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75">
+                                </span>
+                            </button>
+                            <span *brnTooltipContent>{{page.title}}</span>
+                        </hlm-tooltip>
+    -->
                     <!--<button routerLinkActive="bg-primary-500" routerLink={{page.link}}
                             class="flex items-center justify-center p-2 mb-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group">
                         <span
                             class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                     </button>-->
                 </li>
-                <li hlmAccordion *ngIf="page.subPages">
-                    <div hlmAccordionItem class="flex border-none">
-                        <button hlmAccordionTrigger
-                                class="flex items-center justify-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group hover:no-underline text-[16px]">
+                <li *ngIf="page.subPages">
+                    <div class="flex border-none">
+                        <button
+                            class="flex items-center justify-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition group hover:no-underline text-[16px]">
                             <div class="flex items-center gap-2">
                                 <span
                                     class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
                             </div>
                         </button>
-                        <brn-accordion-content hlm>
+                        <!--<brn-accordion-content hlm>
                             <button *ngFor="let subPage of page.subPages"
                                     routerLinkActive="bg-primary-500" routerLink={{subPage.link}}
                                     class="flex items-center p-2 pl-9 rounded-lg group w-full text-white gap-2 group hover:bg-gris-600 transition mb-1">
                                 {{ subPage.title }}
                             </button>
-                        </brn-accordion-content>
+                        </brn-accordion-content>-->
                     </div>
                 </li>
             </ul>
         </div>
         <div class="px-2 flex items-center mb-5 flex-col gap-3">
-            <button hlmBtn variant='outline' class="w-full font-bold text-white gap-1 p-0.5" (click)="onClickSignOut()">
+            <button class="w-full font-bold text-white gap-1 p-0.5" (click)="onClickSignOut()">
                 <span class="icon-[heroicons-outline--logout] h-5 w-5"></span>
             </button>
             <div class="flex justify-center py-2.5 px-1">

@@ -1,23 +1,13 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrnAccordionContentComponent } from '@spartan-ng/ui-accordion-brain';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { pages } from '@lib/utils';
 import { AuthService } from '@lib/services';
 import { SidebarChangerService } from '@lib/services/responsive/sidebar-changer.service';
-import { HlmAccordionModule } from '@lib/ui/ui-accordion-helm/src';
-import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 @Component({
     selector: 'app-sidebar-big',
     standalone: true,
-    imports: [
-        CommonModule,
-        HlmAccordionModule,
-        HlmButtonModule,
-        BrnAccordionContentComponent,
-        RouterLink,
-        RouterLinkActive,
-    ],
+    imports: [CommonModule, RouterLink, RouterLinkActive],
     templateUrl: './sidebar-big.component.html',
 })
 export class SidebarBigComponent {
