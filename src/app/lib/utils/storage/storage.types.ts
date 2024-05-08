@@ -5,9 +5,13 @@
     };
 };*/
 
-export type StorageObjectType = 'appSession';
+export type StorageObjectType = 'appSession' | 'mode';
 
 export type StorageObjectData<T extends StorageObjectType> = {
     type: T;
-    data: T extends 'appSession' ? { user: string; token: string; authorities: string; modo: boolean } : never;
+    data: T extends 'appSession'
+        ? { user: string; token: string; authorities: string; modo: boolean }
+        : T extends 'mode'
+          ? boolean
+          : never;
 };

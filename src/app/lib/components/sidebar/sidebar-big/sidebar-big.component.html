@@ -34,7 +34,7 @@
             <hr class="mb-4 border-gray-100 opacity-50" />
             <ul>
                 <li *ngFor="let page of pages" class="font-medium pb-2">
-                    <a *ngIf="!page.subPages" routerLinkActive="bg-gris-600 outline outline-2 outline-gris-400" routerLink={{page.link}}
+                    <a *ngIf="!page.subPages" routerLinkActive="bg-gris-600 outline outline-1 outline-gris-400" routerLink={{page.link}}
                             class="duration-300 flex items-center  p-2 my-0.5 rounded-lg group w-full text-white gap-2 group hover:bg-gris-500 transition group">
                         <span
                             class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
@@ -43,9 +43,9 @@
                     <div hlmAccordion *ngIf="page.subPages">
                         <div hlmAccordionItem class="flex border-none">
                             <button hlmAccordionTrigger
-                                    class="[&[data-state=open]]:bg-gris-650 flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-650 transition group hover:no-underline text-[16px]">
+                                    class="[&[data-state=open]]:bg-gris-650  flex items-center p-2 rounded-lg group w-full text-white gap-2 group hover:bg-gris-650 transition group hover:no-underline text-[16px]">
                                 <div class="flex items-center gap-2">
-                                    <span class="{{page.icon}} w-5 h-5 bg-gris-100 opacity-80 group-hover:opacity-100 transition duration-75"></span>
+                                    <span class="{{page.icon}} w-5 h-5 bg-gris-100  opacity-80 group-hover:opacity-100 transition duration-75"></span>
                                         {{ page.title }}
                                 </div>
                                 <span hlmAccordionIcon

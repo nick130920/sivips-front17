@@ -1,23 +1,22 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { environment } from '@env/environment';
 import { AuthService } from '@lib/services';
+import { environment } from '@env/environment';
 
 /**
- * Interceptor that adds an Authorization header to requests that are authenticated and target the API URL.
+ * Interceptor that adds an Jsession Cookie to requests that are authenticated and target the API URL.
  *
  * @param request The request object.
  * @param next The next interceptor in the chain.
  *
  * @returns The next Observable.
  */
-export const jwtInterceptor: HttpInterceptorFn = (request, next) => {
+export const jsessionInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService);
-
-    const isRequestAuthorized = authService.isAuthenticated && request.url.startsWith(environment.apiUrl);
+    const isRequestAuthorized = authService.isAuthenticated && req.url.startsWith(environment.apiUrl);
 
     if (isRequestAuthorized) {
-        const clonedRequest = request.clone({
+        const clonedRequest = req.clone({
             setHeaders: {
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 Authorization: `Authorization`,
@@ -27,5 +26,5 @@ export const jwtInterceptor: HttpInterceptorFn = (request, next) => {
         return next(clonedRequest);
     }
 
-    return next(request);
+    return next(req);
 };

@@ -18,13 +18,13 @@ export class AuthService {
     }
 
     get isModoAdmin(): boolean {
-        const storedMode = sessionStorage.getItem('mode');
-        if (storedMode) {
-            this.isModo$.next(Boolean(storedMode));
+        const isStoredMode = storage.getItem<'mode'>('mode');
+        if (isStoredMode != null) {
+            this.isModo$.next(isStoredMode);
         } else {
-            this._http.get<boolean>(`${this._apiUrl}/api/mode`).subscribe((mode) => {
-                sessionStorage.setItem('mode', String(mode));
-                this.isModo$.next(mode);
+            this._http.get<boolean>(`${this._apiUrl}/api/mode`).subscribe((data) => {
+                storage.setItem<'mode'>('mode', data);
+                this.isModo$.next(data);
             });
         }
         return this.isModo$.getValue();

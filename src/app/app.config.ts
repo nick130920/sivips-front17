@@ -3,9 +3,10 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { jwtInterceptor, serverErrorInterceptor } from '@lib/interceptors';
 import { routes } from './app.routes';
+import { prodInterceptor } from '@lib/interceptors/prod.interceptor';
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes, withComponentInputBinding()),
-        provideHttpClient(withInterceptors([serverErrorInterceptor, jwtInterceptor])),
+        provideHttpClient(withInterceptors([serverErrorInterceptor, jwtInterceptor, prodInterceptor])),
     ],
 };
