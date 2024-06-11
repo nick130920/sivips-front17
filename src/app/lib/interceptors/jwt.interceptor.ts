@@ -1,8 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { environment } from '@env/environment';
-import { AuthService } from '@lib/services';
-
 /**
  * Interceptor that adds an Authorization header to requests that are authenticated and target the API URL.
  *
@@ -12,9 +9,7 @@ import { AuthService } from '@lib/services';
  * @returns The next Observable.
  */
 export const jwtInterceptor: HttpInterceptorFn = (request, next) => {
-    const authService = inject(AuthService);
-
-    const isRequestAuthorized = authService.isAuthenticated && request.url.startsWith(environment.apiUrl);
+    const isRequestAuthorized = request.url.startsWith(environment.apiUrl);
 
     if (isRequestAuthorized) {
         const clonedRequest = request.clone({

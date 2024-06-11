@@ -19,8 +19,6 @@ export const prodInterceptor: HttpInterceptorFn = (request, next) => {
                 Angular: `true`,
             },
         });
-        console.log(clonedRequest);
-
         return next(clonedRequest);
     }
 

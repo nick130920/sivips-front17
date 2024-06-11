@@ -6,11 +6,6 @@ export const routes: Routes = [
         loadComponent: async () => (await import('./login/login.component')).LoginComponent,
     },
     {
-        path: 'token',
-        title: 'Token',
-        loadComponent: async () => (await import('./token/token.component')).TokenComponent,
-    },
-    {
         path: '**',
         redirectTo: 'login',
     },
