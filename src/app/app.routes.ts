@@ -7,13 +7,18 @@ export const routes: Routes = [
         loadChildren: async () => (await import('@pages/auth')).routes,
         canMatch: [authGuard({ requiresAuthentication: false })],
     },
-    {
+    /*{
         path: '',
         loadChildren: async () => (await import('@pages/home')).routes,
         canMatch: [authGuard()],
+    },*/
+    {
+        path: 'dashboard',
+        loadChildren: async () => (await import('@pages/dashboard/')).routes,
+        canMatch: [authGuard({ requiresAuthentication: true })],
     },
     {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: 'dashboard',
     },
 ];

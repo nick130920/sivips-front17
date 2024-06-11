@@ -1,5 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '@env/environment';
+
 /**
  * Interceptor that adds an Authorization header to requests that are authenticated and target the API URL.
  *
@@ -8,17 +9,16 @@ import { environment } from '@env/environment';
  *
  * @returns The next Observable.
  */
-export const jwtInterceptor: HttpInterceptorFn = (request, next) => {
+export const prodInterceptor: HttpInterceptorFn = (request, next) => {
     const isRequestAuthorized = request.url.startsWith(environment.apiUrl);
 
     if (isRequestAuthorized) {
         const clonedRequest = request.clone({
             setHeaders: {
                 // eslint-disable-next-line @typescript-eslint/naming-convention
-                Authorization: `Authorization`,
+                Angular: `true`,
             },
         });
-
         return next(clonedRequest);
     }
 
