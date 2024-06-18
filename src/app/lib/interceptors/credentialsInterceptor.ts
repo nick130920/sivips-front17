@@ -8,7 +8,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
  *
  * @returns The next Observable.
  */
-export const jsessionInterceptor: HttpInterceptorFn = (request, next) => {
+export const credentialsInterceptor: HttpInterceptorFn = (request, next) => {
     const cloned = request.clone({
         withCredentials: true,
     });

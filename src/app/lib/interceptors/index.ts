@@ -1,2 +1,2 @@
-export * from './jsession.interceptor';
+export * from './credentialsInterceptor';
 export * from './server-error.interceptor';

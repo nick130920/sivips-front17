@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8280/sivips',
-    // apiUrl: 'http://nicolas.usco.edu.co/sivips',
+    // apiUrl: 'http://localhost:8280/sivips',
+    apiUrl: 'http://nicolas.usco.edu.co/sivips',
 };
 
 /*

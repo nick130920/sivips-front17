@@ -15,9 +15,6 @@ export class AuthService {
     constructor(private _http: HttpClient) {}
 
     get isLoggedIn(): boolean {
-        this._http.get<boolean>(`${this._apiUrl}/api/session`).subscribe((data) => {
-            this.isLoggedIn$.next(data);
-        });
         return this.isLoggedIn$.getValue();
     }
 
@@ -52,13 +49,22 @@ export class AuthService {
     }
     secondLogin(password: string): Observable<never> {
         const url = `${this._apiUrl}/segundopassword`;
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        const body = `password=${encodeURIComponent(password)}`;
 
-        return this._http.post(url, password, { observe: 'response' }).pipe(
+        return this._http.post(url, body, { observe: 'response', headers: headers }).pipe(
             tap((response) => {
                 console.log(response);
             }),
         ) as Observable<never>;
     }
 
+    loggedIn(): void {
+        this._http.get<boolean>(`${this._apiUrl}/api/session`).subscribe((data) => {
+            console.log(data);
+            this.isLoggedIn$.next(data);
+        });
+    }
     logout(): void {}
 }

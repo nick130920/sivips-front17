@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     public wizardService = inject(WizardControllerService);
     protected authService = inject(AuthService);
     public steps: Wizard[] = [
-        { title: 'Paso 1', description: 'Primera contraseña', clickable: false },
-        { title: 'Paso 2', description: 'Segunda Contraseña', clickable: false },
+        { title: 'Paso 1', description: 'Primera contraseña', clickable: true },
+        { title: 'Paso 2', description: 'Segunda Contraseña', clickable: true },
     ];
 
     loginForm = new FormGroup({
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
                     if (this.authService.isModoAdmin) {
                         this.nextStep();
                     } else {
-                        this._router.navigate(['/home']);
+                        this._router.navigate(['/dashboard']);
                     }
                 });
         }
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
                 )
                 .subscribe(() => {
                     if (this.authService.isModoAdmin) {
-                        this._router.navigate(['/home']);
+                        this._router.navigate(['/dashboard']);
                     }
                 });
         }
@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         initFlowbite();
+        this.authService.loggedIn();
     }
 
     nextStep(): void {
