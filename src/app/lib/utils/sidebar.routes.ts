@@ -7,5 +7,6 @@ export const pages: Pages[] = [
         subPages: [{ title: 'About', link: '/about/' }],
         icon: 'icon-[solar--document-bold]',
     },
+    { title: 'CAP', link: '/dashboard/cap', icon: 'icon-[tabler--align-center]' },
     // { title: 'Dashboard', link: '/dashboard', icon: 'icon-[solar--home-2-bold]' },
 ];

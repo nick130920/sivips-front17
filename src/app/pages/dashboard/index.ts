@@ -8,6 +8,12 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
+                title: 'Cap',
+                loadChildren: async () => (await import('@pages/cap')).routes,
+                canMatch: [authGuard({ requiresAuthentication: false })],
+            },
+            {
+                path: '',
                 title: 'Home',
                 loadChildren: async () => (await import('@pages/home')).routes,
                 canMatch: [authGuard({ requiresAuthentication: false })],

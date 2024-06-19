@@ -18,6 +18,11 @@ export const routes: Routes = [
         canMatch: [authGuard({ requiresAuthentication: false })],
     },
     {
+        path: 'cap',
+        loadChildren: async () => (await import('@pages/cap/')).routes,
+        canMatch: [authGuard({ requiresAuthentication: false })],
+    },
+    {
         path: '**',
         redirectTo: 'dashboard',
     },
