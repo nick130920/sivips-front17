@@ -5,7 +5,7 @@
                 <th class="py-2 px-4 border-b">Nombre</th>
                 <th class="py-2 px-4 border-b">Descripción</th>
                 <th class="py-2 px-4 border-b">Obligatorio</th>
-                <th class="py-2 px-4 border-b">Editar</th>
+                <th class="py-2 px-4 border-b">Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -13,10 +13,10 @@
                 <td class="py-2 px-4 border-b text-center">{{ item.requirementName }}</td>
                 <td class="py-2 px-4 border-b text-center">{{ item.description }}</td>
                 <td class="py-2 px-4 border-b text-center">
-                    <input type="checkbox" [checked]="item.mandatory" disabled>
+                    <input type="checkbox" [checked]="item.mandatory" disabled class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none">
                 </td>
                 <td class="py-2 px-4 border-b text-center">
-                    <button (click)="editItem(item)" hlmBtn variant='default' class="w-30 font-bold hover:border text-white mr-2">Editar</button>
+                    <button (click)="editItem(item)" hlmBtn variant='default' class="w-28 font-bold hover:border text-white mr-2">Editar</button>
                 </td>
             </tr>
         </tbody>
