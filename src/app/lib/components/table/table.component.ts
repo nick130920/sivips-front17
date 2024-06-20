@@ -12,8 +12,13 @@ import { CapItem } from '@lib/interfaces';
 export class TableComponent {
     @Input() items: CapItem[] = [];
     @Output() edit = new EventEmitter<CapItem>();
+    @Output() delete = new EventEmitter<CapItem>();
 
     editItem = (item: CapItem): void => {
         this.edit.emit(item);
+    };
+
+    deleteItem = (item: CapItem): void => {
+        this.delete.emit(item);
     };
 }

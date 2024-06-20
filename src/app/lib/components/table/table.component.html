@@ -2,21 +2,46 @@
     <table class="min-w-full bg-white border border-gray-200">
         <thead>
             <tr class="bg-white text-gray-800">
-                <th class="py-2 px-4 border-b">Nombre</th>
-                <th class="py-2 px-4 border-b">Descripción</th>
-                <th class="py-2 px-4 border-b">Obligatorio</th>
-                <th class="py-2 px-4 border-b">Accion</th>
+                <th class="py-2 px-4 border-b text-center">Nombre</th>
+                <th class="py-2 px-4 border-b text-center">Descripción</th>
+                <th class="py-2 px-4 border-b text-center">Obligatorio</th>
+                <th class="py-2 px-4 border-b text-center">Accion</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of items" class="hover:bg-gray-100">
+            <tr
+                *ngFor="let item of items"
+                class="hover:bg-gray-100"
+            >
                 <td class="py-2 px-4 border-b text-center">{{ item.requirementName }}</td>
                 <td class="py-2 px-4 border-b text-center">{{ item.description }}</td>
                 <td class="py-2 px-4 border-b text-center">
-                    <input type="checkbox" [checked]="item.mandatory" disabled class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none">
+                    <input
+                        type="checkbox"
+                        [checked]="item.mandatory"
+                        disabled
+                        class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"
+                    />
                 </td>
-                <td class="py-2 px-4 border-b text-center">
-                    <button (click)="editItem(item)" hlmBtn variant='default' class="w-28 font-bold hover:border text-white mr-2">Editar</button>
+                <td class="py-5 px-7 border-b text-center">
+                    <button
+                        (click)="editItem(item)"
+                        (keyup.enter)="editItem(item)"
+                        (keyup.space)="editItem(item)"
+                        class="focus:outline-none"
+                    >
+                        <i class="icon-[solar--pen-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        <span class="sr-only">Edit</span>
+                    </button>
+                    <button
+                        (click)="deleteItem(item)"
+                        (keyup.enter)="deleteItem(item)"
+                        (keyup.space)="deleteItem(item)"
+                        class="focus:outline-none ml-2"
+                    >
+                        <i class="icon-[solar--trash-bin-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        <span class="sr-only">Delete</span>
+                    </button>    
                 </td>
             </tr>
         </tbody>

@@ -50,4 +50,8 @@ export class CapComponent {
             this.items.splice(index, 1);
         }
     };
+
+    onDelete(item: CapItem): void {
+        this.items = this.items.filter((i) => i !== item);
+    }
 }

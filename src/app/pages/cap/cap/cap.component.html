@@ -1,4 +1,4 @@
-<div class="h-20 w-full border border-black">NAVBAR</div> <!--  esto es donde ira a futuro en navbar -->
+
 <div class="bg-gray-50 flex justify-center items-center w-full h-[calc(100vh-80px)] p-10 ">
     <div class="flex flex-col w-full h-full gap-8">
         <h2 class="text-xl">Requisitos Mínimos</h2>
@@ -6,26 +6,27 @@
         <div class="rounded overflow-hidden border shadow-lg bg-white w-[150] h-full">
             <div class="bg-gray-800 font-bold text-xl mb-2 text-white h-12 px-4 py-2">Lista de chequeo</div>
             <form [formGroup]="capForm" (ngSubmit)="onSubmit()" class="mb-8">
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-4 mt-3">
                     <div class="w-1/3 mr-4 px-10 ml-4">
                         <label for="requirementName" class="block mb-1 text-sm font-semibold text-gray-600">Nombre del requisito:</label>
                         <input type="text" id="requirementName" formControlName="requirementName" required
                                 class="border-b-2 border-gray-300 focus:border-gray-600 focus:ring-gray-500">
                     </div>
-                    <div class="w-1/3 mr-4">
+                    <div class="w-1/3 mr-4 items-center">
                         <label for="description" class="block mb-1 text-sm font-semibold text-gray-600">Descripción:</label>
                         <input type="text" id="description" formControlName="description" required
                                     class="border-b-2 border-gray-300 focus:border-gray-600 focus:ring-gray-500">
                     </div>
-                    <div class="w-1/3 mr-5 flex items-center">
+                    <div class="w-1/3 mr-4 flex items-center">
                         <label for="mandatory" class="block text-sm font-semibold text-gray-600">Obligatorio:</label>
                         <input type="checkbox" id="mandatory" formControlName="mandatory" class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none">
                     </div>
-                    <button hlmBtn variant='default' class="w-40 font-bold hover:border text-white mr-36" type="submit">Agregar</button>
+                    <button hlmBtn variant='default' class="items-center w-40 font-bold hover:border text-white mr-36" type="submit">Agregar</button>
                 </div>
             </form>
             <div class="overflow-y-auto h-[calc(60vh-150px)]">
-                <app-table [items]="items" (edit)="onEdit($event)"></app-table>
+                <app-table [items]="items" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-table>
+                
             </div>
             
         </div>
