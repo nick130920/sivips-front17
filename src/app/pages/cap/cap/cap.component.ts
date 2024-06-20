@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '@lib/components';
@@ -13,7 +13,14 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
     imports: [NgIf, SidebarComponent, RouterModule, ReactiveFormsModule, TableComponent, HlmButtonModule],
     templateUrl: './cap.component.html',
 })
-export class CapComponent {
+export class CapComponent implements OnInit {
+    ngOnInit(): void {
+        this.items = [
+            { requirementName: 'nombre 1', description: 'Descripción 1', mandatory: true },
+            { requirementName: 'nombre 2', description: 'Descripción 2', mandatory: false },
+        ];
+        this._updateVisibleItems();
+    }
     capForm = new FormGroup({
         // eslint-disable-next-line @typescript-eslint/unbound-method
         requirementName: new FormControl('', Validators.required),
@@ -24,7 +31,7 @@ export class CapComponent {
     });
 
     items: CapItem[] = [];
-
+    visibleItems: CapItem[] = [...this.items];
     onSubmit = (): void => {
         const formValue = this.capForm.value;
         const newItem: CapItem = {
@@ -34,7 +41,7 @@ export class CapComponent {
         };
 
         this.items.push(newItem);
-        this.items = [...this.items];
+        this._updateVisibleItems();
         console.log(newItem);
         this.capForm.reset();
     };
@@ -48,10 +55,19 @@ export class CapComponent {
                 mandatory: item.mandatory,
             });
             this.items.splice(index, 1);
+            this._updateVisibleItems();
         }
     };
 
     onDelete(item: CapItem): void {
-        this.items = this.items.filter((i) => i !== item);
+        const index = this.items.indexOf(item);
+        if (index !== -1) {
+            this.items.splice(index, 1);
+            this._updateVisibleItems();
+        }
+    }
+
+    private _updateVisibleItems(): void {
+        this.visibleItems = [...this.items];
     }
 }
