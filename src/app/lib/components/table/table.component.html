@@ -9,39 +9,49 @@
             </tr>
         </thead>
         <tbody>
-            <tr
-                *ngFor="let item of items"
-                class="hover:bg-gray-100"
-            >
-                <td class="py-2 px-4 border-b text-center">{{ item.requirementName }}</td>
-                <td class="py-2 px-4 border-b text-center">{{ item.description }}</td>
+            <tr *ngFor="let item of items; let i = index" class="hover:bg-gray-100">
                 <td class="py-2 px-4 border-b text-center">
-                    <input
-                        type="checkbox"
-                        [checked]="item.mandatory"
-                        disabled
-                        class="appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"
-                    />
+                    <ng-container *ngIf="editingIndex === i; else showName">
+                        <input [(ngModel)]="item.requirementName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    </ng-container>
+                    <ng-template #showName>{{ item.requirementName }}</ng-template>
+                </td>
+                <td class="py-2 px-4 border-b text-center">
+                    <ng-container *ngIf="editingIndex === i; else showDescription">
+                        <input [(ngModel)]="item.description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    </ng-container>
+                    <ng-template #showDescription>{{ item.description }}</ng-template>
+                </td>
+                <td class="py-2 px-4 border-b text-center">
+                    <ng-container *ngIf="editingIndex === i; else showMandatory">
+                        <input type="checkbox" [(ngModel)]="item.mandatory" class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                    </ng-container>
+                    <ng-template #showMandatory>
+                        <input type="checkbox" [checked]="item.mandatory" disabled class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                    </ng-template>
                 </td>
                 <td class="py-5 px-7 border-b text-center">
-                    <button
-                        (click)="editItem(item)"
-                        (keyup.enter)="editItem(item)"
-                        (keyup.space)="editItem(item)"
-                        class="focus:outline-none"
-                    >
-                        <i class="icon-[solar--pen-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
-                        <span class="sr-only">Edit</span>
-                    </button>
-                    <button
-                        (click)="deleteItem(item)"
-                        (keyup.enter)="deleteItem(item)"
-                        (keyup.space)="deleteItem(item)"
-                        class="focus:outline-none ml-2"
-                    >
-                        <i class="icon-[solar--trash-bin-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
-                        <span class="sr-only">Delete</span>
-                    </button>    
+                    <ng-container *ngIf="editingIndex === i; else actionButtons">
+                        <button (click)="saveEdit(item)" class="py-2 px-4 text-primary-800 items-center text-sm">
+                            <div class="flex items-center">
+                                Guardar
+                                <span class="icon-[material-symbols-light--save] w-5 h-5 "></span>
+                            </div>
+                        </button>
+                        <button (click)="cancelEdit()" class="px-2 items-center text-primary-800">
+                            <div class="felx items-center">
+                                <span class="icon-[material-symbols-light--cancel] w-6 h-6"></span>
+                            </div>
+                        </button>
+                    </ng-container>
+                    <ng-template #actionButtons>
+                        <button (click)="startEdit(i)" class="px-4">
+                            <i class="icon-[solar--pen-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        </button>
+                        <button (click)="deleteItem(item)">
+                            <i class="icon-[solar--trash-bin-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        </button>
+                    </ng-template>
                 </td>
             </tr>
         </tbody>

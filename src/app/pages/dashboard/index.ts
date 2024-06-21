@@ -14,7 +14,7 @@ export const routes: Routes = [
             },
             {
                 path: 'cap',
-                title: 'Cap',
+                title: 'CAP',
                 loadComponent: async () => (await import('../cap/cap/cap.component')).CapComponent,
                 canMatch: [authGuard({ requiresAuthentication: false })],
             },

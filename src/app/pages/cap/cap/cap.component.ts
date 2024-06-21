@@ -27,23 +27,27 @@ export class CapComponent implements OnInit {
         // eslint-disable-next-line @typescript-eslint/unbound-method
         description: new FormControl('', Validators.required),
         // eslint-disable-next-line @typescript-eslint/unbound-method
-        mandatory: new FormControl(false, Validators.required),
+        mandatory: new FormControl(false),
     });
 
     items: CapItem[] = [];
     visibleItems: CapItem[] = [...this.items];
     onSubmit = (): void => {
-        const formValue = this.capForm.value;
-        const newItem: CapItem = {
-            requirementName: formValue.requirementName || '',
-            description: formValue.description || '',
-            mandatory: formValue.mandatory || false,
-        };
+        if (this.capForm.valid) {
+            const formValue = this.capForm.value;
+            const newItem: CapItem = {
+                requirementName: formValue.requirementName || '',
+                description: formValue.description || '',
+                mandatory: formValue.mandatory || false,
+            };
 
-        this.items.push(newItem);
-        this._updateVisibleItems();
-        console.log(newItem);
-        this.capForm.reset();
+            this.items.push(newItem);
+            this._updateVisibleItems();
+            console.log(newItem);
+            this.capForm.reset({ mandatory: false });
+        } else {
+            console.log('El formulario no es válido');
+        }
     };
 
     onEdit = (item: CapItem): void => {
@@ -69,5 +73,13 @@ export class CapComponent implements OnInit {
 
     private _updateVisibleItems(): void {
         this.visibleItems = [...this.items];
+    }
+
+    updateItem(updatedItem: CapItem): void {
+        const index = this.items.findIndex((item) => item.requirementName === updatedItem.requirementName);
+        if (index !== -1) {
+            this.items[index] = updatedItem;
+            this._updateVisibleItems();
+        }
     }
 }
