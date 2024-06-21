@@ -5,25 +5,25 @@
                 <th class="py-2 px-4 border-b text-center">Nombre</th>
                 <th class="py-2 px-4 border-b text-center">Descripción</th>
                 <th class="py-2 px-4 border-b text-center">Obligatorio</th>
-                <th class="py-2 px-4 border-b text-center">Accion</th>
+                <th class="py-2 px-4 border-b text-center">Acción</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of items; let i = index" class="hover:bg-gray-100">
                 <td class="py-2 px-4 border-b text-center">
-                    <ng-container *ngIf="editingIndex === i; else showName">
-                        <input [(ngModel)]="item.requirementName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    <ng-container *ngIf="editingIndexes.has(i); else showName">
+                        <input [(ngModel)]="item.requirementName" class="w-50 py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
                     </ng-container>
                     <ng-template #showName>{{ item.requirementName }}</ng-template>
                 </td>
                 <td class="py-2 px-4 border-b text-center">
-                    <ng-container *ngIf="editingIndex === i; else showDescription">
-                        <input [(ngModel)]="item.description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    <ng-container *ngIf="editingIndexes.has(i); else showDescription">
+                        <input [(ngModel)]="item.description" class="py-2.5 px-0 w-50 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
                     </ng-container>
                     <ng-template #showDescription>{{ item.description }}</ng-template>
                 </td>
                 <td class="py-2 px-4 border-b text-center">
-                    <ng-container *ngIf="editingIndex === i; else showMandatory">
+                    <ng-container *ngIf="editingIndexes.has(i); else showMandatory">
                         <input type="checkbox" [(ngModel)]="item.mandatory" class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
                     </ng-container>
                     <ng-template #showMandatory>
@@ -31,15 +31,15 @@
                     </ng-template>
                 </td>
                 <td class="py-5 px-7 border-b text-center">
-                    <ng-container *ngIf="editingIndex === i; else actionButtons">
-                        <button (click)="saveEdit(item)" class="py-2 px-4 text-primary-800 items-center text-sm">
+                    <ng-container *ngIf="editingIndexes.has(i); else actionButtons">
+                        <button (click)="saveEdit(item, i)" class="py-2 px-2 text-primary-800 items-center text-sm align-middle">
                             <div class="flex items-center">
                                 Guardar
                                 <span class="icon-[material-symbols-light--save] w-5 h-5 "></span>
                             </div>
                         </button>
-                        <button (click)="cancelEdit()" class="px-2 items-center text-primary-800">
-                            <div class="felx items-center">
+                        <button (click)="cancelEdit(i)" class="py-2 px-4 text-primary-800 items-center text-sm align-middle">
+                            <div class="flex items-center">
                                 <span class="icon-[material-symbols-light--cancel] w-6 h-6"></span>
                             </div>
                         </button>

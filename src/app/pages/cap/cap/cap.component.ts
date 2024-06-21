@@ -16,8 +16,8 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 export class CapComponent implements OnInit {
     ngOnInit(): void {
         this.items = [
-            { requirementName: 'nombre 1', description: 'Descripción 1', mandatory: true },
-            { requirementName: 'nombre 2', description: 'Descripción 2', mandatory: false },
+            { requirementName: 'Nombre 1', description: 'Descripción 1', mandatory: true },
+            { requirementName: 'Nombre 2', description: 'Descripción 2', mandatory: false },
         ];
         this._updateVisibleItems();
     }

@@ -16,19 +16,19 @@ export class TableComponent {
     @Output() delete = new EventEmitter<CapItem>();
     @Output() update = new EventEmitter<CapItem>();
 
-    editingIndex: number | null = null;
+    editingIndexes: Set<number> = new Set<number>();
 
     startEdit(index: number): void {
-        this.editingIndex = index;
+        this.editingIndexes.add(index);
     }
 
-    saveEdit(item: CapItem): void {
-        this.editingIndex = null;
+    saveEdit(item: CapItem, index: number): void {
+        this.editingIndexes.delete(index);
         this.update.emit(item);
     }
 
-    cancelEdit(): void {
-        this.editingIndex = null;
+    cancelEdit(index: number): void {
+        this.editingIndexes.delete(index);
     }
 
     editItem(item: CapItem): void {
