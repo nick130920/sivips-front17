@@ -14,7 +14,7 @@ export const routes: Routes = [
     },*/
     {
         path: 'dashboard',
-        loadChildren: async () => (await import('@pages/dashboard/')).routes,
+        loadChildren: async () => (await import('@pages/dashboard')).routes,
         canMatch: [authGuard({ requiresAuthentication: false })],
     },
     {

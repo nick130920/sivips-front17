@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '@lib/components';
 import { TableComponent } from '@lib/components/table/table.component';
@@ -14,54 +14,57 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
     templateUrl: './cap.component.html',
 })
 export class CapComponent implements OnInit {
+    items: CapItem[] = [];
+    visibleItems: CapItem[] = [];
+    constructor(
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        private fb: FormBuilder,
+    ) {}
+    capForm = this.fb.group({
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        requirementName: ['', Validators.required],
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        description: ['', Validators.required],
+        mandatory: [false],
+    });
     ngOnInit(): void {
         this.items = [
             { requirementName: 'Nombre 1', description: 'Descripción 1', mandatory: true },
             { requirementName: 'Nombre 2', description: 'Descripción 2', mandatory: false },
         ];
+
         this._updateVisibleItems();
     }
-    capForm = new FormGroup({
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        requirementName: new FormControl('', Validators.required),
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        description: new FormControl('', Validators.required),
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        mandatory: new FormControl(false),
-    });
 
-    items: CapItem[] = [];
-    visibleItems: CapItem[] = [...this.items];
-    onSubmit = (): void => {
-        if (this.capForm.valid) {
-            const formValue = this.capForm.value;
-            const newItem: CapItem = {
-                requirementName: formValue.requirementName || '',
-                description: formValue.description || '',
-                mandatory: formValue.mandatory || false,
-            };
-
-            this.items.push(newItem);
-            this._updateVisibleItems();
-            console.log(newItem);
-            this.capForm.reset({ mandatory: false });
-        } else {
-            console.log('El formulario no es válido');
+    onSubmit(): void {
+        this.capForm.markAllAsTouched();
+        if (this.capForm.invalid) {
+            return;
         }
-    };
 
-    onEdit = (item: CapItem): void => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const newItem: CapItem = JSON.parse(JSON.stringify(this.capForm.value));
+
+        this.items.push(newItem);
+        this._updateVisibleItems();
+        console.log(newItem);
+
+        this.capForm.reset();
+    }
+
+    onEdit(item: CapItem): void {
         const index = this.items.indexOf(item);
         if (index !== -1) {
-            this.capForm.setValue({
+            this.capForm.patchValue({
                 requirementName: item.requirementName,
                 description: item.description,
                 mandatory: item.mandatory,
             });
+
             this.items.splice(index, 1);
             this._updateVisibleItems();
         }
-    };
+    }
 
     onDelete(item: CapItem): void {
         const index = this.items.indexOf(item);
