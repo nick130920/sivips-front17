@@ -16,6 +16,7 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 export class CapComponent implements OnInit {
     items: CapItem[] = [];
     visibleItems: CapItem[] = [];
+    loading = false;
     constructor(
         // eslint-disable-next-line @typescript-eslint/naming-convention
         private fb: FormBuilder,
@@ -41,15 +42,16 @@ export class CapComponent implements OnInit {
         if (this.capForm.invalid) {
             return;
         }
-
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const newItem: CapItem = JSON.parse(JSON.stringify(this.capForm.value));
-
-        this.items.push(newItem);
-        this._updateVisibleItems();
-        console.log(newItem);
-
-        this.capForm.reset();
+        this.loading = true;
+        setTimeout(() => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const newItem: CapItem = JSON.parse(JSON.stringify(this.capForm.value));
+            this.items.push(newItem);
+            this._updateVisibleItems();
+            console.log(newItem);
+            this.capForm.reset();
+            this.loading = false;
+        }, 800);
     }
 
     onEdit(item: CapItem): void {
@@ -84,5 +86,9 @@ export class CapComponent implements OnInit {
             this.items[index] = updatedItem;
             this._updateVisibleItems();
         }
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false;
+        }, 800);
     }
 }
