@@ -1,0 +1,60 @@
+<div class="overflow-x-auto flex items-center">
+    <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+            <tr class="bg-white text-gray-800">
+                <th class="py-2 px-4 border-b text-center">Nombre</th>
+                <th class="py-2 px-4 border-b text-center">Descripción</th>
+                <th class="py-2 px-4 border-b text-center">Obligatorio</th>
+                <th class="py-2 px-4 border-b text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index" class="hover:bg-gray-100">
+                <td class="py-2 px-4 border-b text-center">
+                    <ng-container *ngIf="editingIndexes.has(i); else showName">
+                        <input [(ngModel)]="item.requirementName" class="w-50 py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    </ng-container>
+                    <ng-template #showName>{{ item.requirementName }}</ng-template>
+                </td>
+                <td class="py-2 px-4 border-b text-center">
+                    <ng-container *ngIf="editingIndexes.has(i); else showDescription">
+                        <input [(ngModel)]="item.productionty" class="py-2.5 px-0 w-50 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"/>
+                    </ng-container>
+                    <ng-template #showDescription>{{ item.productionty }}</ng-template>
+                </td>
+                <td class="py-2 px-4 border-b text-center">
+                    <ng-container *ngIf="editingIndexes.has(i); else showMandatory">
+                        <input type="checkbox" [(ngModel)]="item.mandatory" class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                    </ng-container>
+                    <ng-template #showMandatory>
+                        <input type="checkbox" [checked]="item.mandatory" disabled class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                    </ng-template>
+                </td>
+                <td class="py-5 px-7 border-b text-center">
+                    <ng-container *ngIf="editingIndexes.has(i); else actionButtons">
+                        <button (click)="saveEdit(item, i)" class="py-2 px-2 text-primary-800 items-center text-sm align-middle">
+                            <div class="flex items-center">
+                                Guardar
+                                <span class="icon-[material-symbols-light--save] w-5 h-5 "></span>
+                            </div>
+                        </button>
+                        <button (click)="cancelEdit(i)" class="py-2 px-4 text-primary-800 items-center text-sm align-middle">
+                            <div class="flex items-center">
+                                <span class="icon-[material-symbols-light--cancel] w-6 h-6"></span>
+                            </div>
+                        </button>
+                    </ng-container>
+                    <ng-template #actionButtons>
+                        <button (click)="startEdit(i)" class="px-4">
+                            <i class="icon-[solar--pen-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        </button>
+                        <button (click)="deleteItem(item)">
+                            <i class="icon-[solar--trash-bin-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                        </button>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
