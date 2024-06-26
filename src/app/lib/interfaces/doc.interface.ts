@@ -1,5 +1,5 @@
 export interface DocItem {
     requirementName: string;
-    productionty: string;
+    productionty: string[];
     mandatory: boolean;
 }

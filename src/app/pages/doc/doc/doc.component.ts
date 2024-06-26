@@ -1,6 +1,6 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '@lib/components';
 import { DoctableComponent } from '@lib/components/doctable/doctable.component';
@@ -10,32 +10,36 @@ import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
 @Component({
     selector: 'app-doc',
     standalone: true,
-    imports: [NgIf, SidebarComponent, RouterModule, ReactiveFormsModule, DoctableComponent, HlmButtonModule],
+    imports: [NgIf, NgFor, SidebarComponent, RouterModule, ReactiveFormsModule, DoctableComponent, HlmButtonModule],
     templateUrl: './doc.component.html',
 })
 export class DocComponent implements OnInit {
     items: DocItem[] = [];
     visibleItems: DocItem[] = [];
     loading = false;
-    constructor(
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        private fb: FormBuilder,
-    ) {}
+    dropdownOpen = false;
+    productionTypes = ['Opción 1', 'Opción 2', 'Opción 3'];
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    constructor(private fb: FormBuilder) {}
+
     docForm = this.fb.group({
         // eslint-disable-next-line @typescript-eslint/unbound-method
         requirementName: ['', Validators.required],
         // eslint-disable-next-line @typescript-eslint/unbound-method
-        productionty: ['', Validators.required],
+        productionty: this.fb.array([], Validators.required),
         mandatory: [false],
     });
+
     ngOnInit(): void {
         this.items = [
-            { requirementName: 'Nombre 1', productionty: 'Producción tipo 1', mandatory: true },
-            { requirementName: 'Nombre 2', productionty: 'Descrición tipo 2', mandatory: false },
+            { requirementName: 'Nombre 1', productionty: ['Producción tipo 1'], mandatory: true },
+            { requirementName: 'Nombre 2', productionty: ['Descrición tipo 2'], mandatory: false },
         ];
 
         this._updateVisibleItems();
     }
+
     onSubmit(): void {
         this.docForm.markAllAsTouched();
         if (this.docForm.invalid) {
@@ -43,15 +47,34 @@ export class DocComponent implements OnInit {
         }
         this.loading = true;
         setTimeout(() => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const newItem: DocItem = JSON.parse(JSON.stringify(this.docForm.value));
+            const newItem: DocItem = {
+                requirementName: this.docForm.value.requirementName as string,
+                productionty: this.docForm.value.productionty as string[],
+                mandatory: this.docForm.value.mandatory as boolean,
+            };
             this.items.push(newItem);
             this._updateVisibleItems();
-            console.log(newItem);
             this.docForm.reset();
             this.loading = false;
         }, 500);
     }
+
+    onCheckboxChange(event: Event): void {
+        const target = event.target as HTMLInputElement;
+        const productionty = this.docForm.get('productionty') as FormArray;
+
+        if (target.checked) {
+            productionty.push(new FormControl(target.value));
+        } else {
+            const index = productionty.controls.findIndex((x) => x.value === target.value);
+            productionty.removeAt(index);
+        }
+    }
+
+    toggleDropdown(): void {
+        this.dropdownOpen = !this.dropdownOpen;
+    }
+
     onEdit(item: DocItem): void {
         const index = this.items.indexOf(item);
         if (index !== -1) {
@@ -62,6 +85,7 @@ export class DocComponent implements OnInit {
             });
         }
     }
+
     onDelete(item: DocItem): void {
         const index = this.items.indexOf(item);
         if (index !== -1) {
@@ -69,6 +93,7 @@ export class DocComponent implements OnInit {
             this._updateVisibleItems();
         }
     }
+
     upDateItem(updatedItem: DocItem): void {
         const index = this.items.findIndex((item) => item.requirementName === updatedItem.requirementName);
         if (index !== -1) {
@@ -80,7 +105,9 @@ export class DocComponent implements OnInit {
             this.loading = false;
         }, 500);
     }
+
     private _updateVisibleItems(): void {
         this.visibleItems = [...this.items];
+        console.log(this.visibleItems);
     }
 }
