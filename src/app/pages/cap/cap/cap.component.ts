@@ -30,8 +30,8 @@ export class CapComponent implements OnInit {
     });
     ngOnInit(): void {
         this.items = [
-            { requirementName: 'Nombre 1', description: 'Descripción 1', mandatory: true },
-            { requirementName: 'Nombre 2', description: 'Descripción 2', mandatory: false },
+            { id: 1, requirementName: 'Nombre 1', description: 'Descripción 1', mandatory: true },
+            { id: 2, requirementName: 'Nombre 2', description: 'Descripción 2', mandatory: false },
         ];
 
         this._updateVisibleItems();

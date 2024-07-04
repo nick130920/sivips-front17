@@ -17,6 +17,8 @@ export class DoctableComponent {
     @Output() update = new EventEmitter<DocItem>();
 
     editingIndexes: Set<number> = new Set<number>();
+    dropdownOpen: number | null = null;
+    productionTypes = ['Opción 1', 'Opción 2', 'Opción 3'];
 
     startEdit(index: number): void {
         this.editingIndexes.add(index);
@@ -29,6 +31,19 @@ export class DoctableComponent {
 
     cancelEdit(index: number): void {
         this.editingIndexes.delete(index);
+    }
+
+    toggleDropdown(index: number): void {
+        this.dropdownOpen = this.dropdownOpen === index ? null : index;
+    }
+
+    onCheckboxChange(item: DocItem, type: string): void {
+        const index = item.productionty.indexOf(type);
+        if (index !== -1) {
+            item.productionty.splice(index, 1);
+        } else {
+            item.productionty.push(type);
+        }
     }
 
     editItem(item: DocItem): void {

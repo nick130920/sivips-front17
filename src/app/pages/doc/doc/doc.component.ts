@@ -1,4 +1,4 @@
-import { NgIf, NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -34,7 +34,7 @@ export class DocComponent implements OnInit {
     ngOnInit(): void {
         this.items = [
             { requirementName: 'Nombre 1', productionty: ['Producción tipo 1'], mandatory: true },
-            { requirementName: 'Nombre 2', productionty: ['Descrición tipo 2'], mandatory: false },
+            { requirementName: 'Nombre 2', productionty: ['Produccion tipo 2'], mandatory: false },
         ];
 
         this._updateVisibleItems();
