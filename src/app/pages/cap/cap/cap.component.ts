@@ -6,6 +6,7 @@ import { SidebarComponent } from '@lib/components';
 import { TableComponent } from '@lib/components/captable/table.component';
 import { CapItem } from '@lib/interfaces';
 import { HlmButtonModule } from '@lib/ui/ui-button-helm/src';
+import { CapService } from '@lib/services/cap/cap.service';
 
 @Component({
     selector: 'app-cap',
@@ -18,23 +19,18 @@ export class CapComponent implements OnInit {
     visibleItems: CapItem[] = [];
     loading = false;
     constructor(
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        private fb: FormBuilder,
+        private _fb: FormBuilder,
+        public capService: CapService,
     ) {}
-    capForm = this.fb.group({
+    capForm = this._fb.group({
         // eslint-disable-next-line @typescript-eslint/unbound-method
-        requirementName: ['', Validators.required],
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        description: ['', Validators.required],
-        mandatory: [false],
+        nombre: ['', Validators.required],
+        // eslint-disable-next-line @typescript-eslint/unbound-method,@typescript-eslint/naming-convention
+        descripcion: ['', Validators.required],
+        obligatorio: [false, { nonNullable: true }],
     });
     ngOnInit(): void {
-        this.items = [
-            { id: 1, requirementName: 'Nombre 1', description: 'Descripción 1', mandatory: true },
-            { id: 2, requirementName: 'Nombre 2', description: 'Descripción 2', mandatory: false },
-        ];
-
-        this._updateVisibleItems();
+        this.obtenerRequisitos();
     }
 
     onSubmit(): void {
@@ -43,19 +39,40 @@ export class CapComponent implements OnInit {
             return;
         }
         this.loading = true;
-        setTimeout(() => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const newItem: CapItem = JSON.parse(JSON.stringify(this.capForm.value));
-            this.items.push(newItem);
-            this._updateVisibleItems();
-            console.log(newItem);
-            this.capForm.reset();
-            this.loading = false;
-        }, 800);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const newItem: CapItem = JSON.parse(JSON.stringify(this.capForm.value));
+        this.capService.addItem(newItem).subscribe({
+            next: (response) => {
+                this.capService.items.update((old) => [...old, newItem]);
+                console.log(response);
+                this.capForm.reset();
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('There was an error!', error);
+                this.loading = false;
+            },
+        });
     }
 
-    onEdit(item: CapItem): void {
-        const index = this.items.indexOf(item);
+    obtenerRequisitos(): void {
+        this.loading = true;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+        this.capService.getItems().subscribe({
+            next: (response) => {
+                this.capService.items.set(response);
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('There was an error!', error);
+                this.loading = false;
+            },
+        });
+    }
+
+    /*onEdit(item: CapItem): void {
+
         if (index !== -1) {
             this.capForm.patchValue({
                 requirementName: item.requirementName,
@@ -66,21 +83,15 @@ export class CapComponent implements OnInit {
             this.items.splice(index, 1);
             this._updateVisibleItems();
         }
-    }
+    }*/
 
     onDelete(item: CapItem): void {
         const index = this.items.indexOf(item);
         if (index !== -1) {
             this.items.splice(index, 1);
-            this._updateVisibleItems();
         }
     }
-
-    private _updateVisibleItems(): void {
-        this.visibleItems = [...this.items];
-    }
-
-    updateItem(updatedItem: CapItem): void {
+    /*updateItem(updatedItem: CapItem): void {
         const index = this.items.findIndex((item) => item.requirementName === updatedItem.requirementName);
         if (index !== -1) {
             this.items[index] = updatedItem;
@@ -90,5 +101,5 @@ export class CapComponent implements OnInit {
         setTimeout(() => {
             this.loading = false;
         }, 800);
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CapItem } from '@lib/interfaces';
@@ -9,22 +9,22 @@ import { environment } from '@env/environment';
 })
 export class CapService {
     private _apiUrl: string = environment.apiUrl;
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    constructor(private http: HttpClient) {}
+    items = signal<CapItem[]>([]);
+    constructor(private _http: HttpClient) {}
 
     getItems(): Observable<CapItem[]> {
-        return this.http.get<CapItem[]>(this._apiUrl);
+        return this._http.get<CapItem[]>(this._apiUrl + '/api/cap/requisitos-minimos');
     }
 
     addItem(item: CapItem): Observable<CapItem> {
-        return this.http.post<CapItem>(this._apiUrl, item);
+        return this._http.post<CapItem>(this._apiUrl + '/api/cap/crear-requisito', item);
     }
 
     updateItem(item: CapItem): Observable<CapItem> {
-        return this.http.put<CapItem>(`${this._apiUrl}/${item.id}`, item); // Asegúrate de que el objeto tenga una propiedad `id`
+        return this._http.post<CapItem>(this._apiUrl + '/api/cap/actualizar-requisito', item); // Asegúrate de que el objeto tenga una propiedad `id`
     }
 
     deleteItem(id: number): Observable<void> {
-        return this.http.delete<void>(`${this._apiUrl}/${id}`);
+        return this._http.delete<void>(`${this._apiUrl}/${id}`);
     }
 }
