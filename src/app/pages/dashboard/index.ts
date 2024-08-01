@@ -7,9 +7,21 @@ export const routes: Routes = [
         loadComponent: async () => (await import('./dashboard/dashboard.component')).DashboardComponent,
         children: [
             {
-                path: '',
+                path: 'home',
                 title: 'Home',
-                loadChildren: async () => (await import('@pages/home')).routes,
+                loadComponent: async () => (await import('../home/home/home.component')).HomeComponent,
+                canMatch: [authGuard({ requiresAuthentication: false })],
+            },
+            {
+                path: 'cap',
+                title: 'CAP',
+                loadComponent: async () => (await import('../cap/cap/cap.component')).CapComponent,
+                canMatch: [authGuard({ requiresAuthentication: false })],
+            },
+            {
+                path: 'doc',
+                title: 'About',
+                loadComponent: async () => (await import('src/app/pages/doc/doc/doc.component')).DocComponent,
                 canMatch: [authGuard({ requiresAuthentication: false })],
             },
         ],

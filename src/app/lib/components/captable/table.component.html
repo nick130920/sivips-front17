@@ -1,0 +1,76 @@
+<div class="overflow-x-auto flex items-center">
+    <div *ngIf="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+        <div class="bg-white p-6 rounded shadow-lg">
+            <p class="text-lg font-semibold mb-4">Cargando...</p>
+            <div class="flex justify-center">
+                <div class="w-16 h-16 border-4 border-gray-200 border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
+            </div>
+        </div>
+    </div>
+    <table class="min-w-full bg-white border border-gray-200" >
+        <thead>
+            <tr class="bg-white text-gray-800">
+                <th class="py-2 px-4 border-b text-center">Nombre</th>
+                <th class="py-2 px-4 border-b text-center">Descripción</th>
+                <th class="py-2 px-4 border-b text-center">Obligatorio</th>
+                <th class="py-2 px-4 border-b text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+
+                <tr *ngFor="let item of capService.items(); let i = index" class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b text-center  w-1/4">
+
+                        @if (editingIndexes.has(i)){
+                                    <input [(ngModel)]="item.nombre"
+                                           class="input-floating peer"
+                                           placeholder="Nombre" />
+
+                        } @else {
+                            {{ item.nombre }}
+                        }
+                    </td>
+                    <td class="py-2 px-4 border-b text-center  w-1/4">
+                        @if (editingIndexes.has(i)){
+                            <input [(ngModel)]="item.descripcion" class="input-floating peer"/>
+                        }@else{
+                            {{ item.descripcion }}
+                        }
+                    </td>
+                    <td class="py-2 px-4 border-b text-center  w-1/4">
+                        <ng-container *ngIf="editingIndexes.has(i); else showMandatory">
+                            <input type="checkbox" [(ngModel)]="item.obligatorio" class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                        </ng-container>
+                        <ng-template #showMandatory>
+                            <input type="checkbox" [checked]="item.obligatorio" disabled class="ml-2 appearance-none h-5 w-5 border border-gray-300 rounded-md checked:bg-gray-800 checked:border-transparent focus:outline-none"/>
+                        </ng-template>
+                    </td>
+                    <td class="py-5 px-7 border-b text-center">
+                        <ng-container *ngIf="editingIndexes.has(i); else actionButtons">
+                            <button (click)="saveEdit(item, i)" class=" text-red-800 hover:text-red-600 text-sm align-middle">
+                                <div class="flex items-center">
+                                    Guardar
+                                    <span class="icon-[material-symbols-light--save] w-5 h-5 "></span>
+                                </div>
+                            </button>
+                            <button (click)="cancelEdit(i)" class="px-4 text-red-800 hover:text-red-600 text-sm align-middle" title="cancelar">
+                                <div class="flex items-center">
+                                    <span class="icon-[material-symbols-light--cancel] w-6 h-6"></span>
+                                </div>
+                            </button>
+                        </ng-container>
+                        <ng-template #actionButtons>
+                            <button (click)="startEdit(i)" class="px-4" title="editar">
+                                <i class="icon-[solar--pen-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                            </button>
+                            <button (click)="deleteItem(item)" title="eliminar">
+                                <i class="icon-[solar--trash-bin-2-bold] cursor-pointer text-red-800 hover:text-red-600 text-center w-5 h-5"></i>
+                            </button>
+                        </ng-template>
+                    </td>
+                </tr>
+
+        </tbody>
+
+    </table>
+</div>
